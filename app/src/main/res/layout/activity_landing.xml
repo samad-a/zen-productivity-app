@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LandingPage">
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    tools:context=".LandingActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -24,10 +27,12 @@
         android:layout_height="80dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/green"
+        android:fontFamily="sans-serif"
         android:outlineProvider="paddedBounds"
         android:text="log in"
         android:textColor="@color/white"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +44,11 @@
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/green"
+        android:fontFamily="sans-serif"
         android:text="sign up"
         android:textColor="@color/white"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
