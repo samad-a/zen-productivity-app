@@ -3,6 +3,9 @@
     <style name="Base.Theme.Zen" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/dark_green</item>
+        <item name="colorAccent">@color/light_green</item>
     </style>
 
     <style name="Theme.Zen" parent="Base.Theme.Zen" />
