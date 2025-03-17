@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val fragment = when (item.itemId) {
                 R.id.pomodoro -> Pomodoro()
                 R.id.tasks -> Tasks()
-                R.id.settings -> Calendar()
+                R.id.calendar -> Calendar()
                 R.id.stats -> Stats()
                 R.id.settings -> Settings()
                 else -> Pomodoro()
