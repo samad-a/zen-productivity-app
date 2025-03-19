@@ -1,6 +1,5 @@
 package dev.samadali.zen
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -106,7 +105,6 @@ class Pomodoro : Fragment() {
     private lateinit var startStopButton: Button
     private lateinit var studyTextInput: TextInputEditText
     private lateinit var breakTextInput: TextInputEditText
-    private var progressAnimator: ObjectAnimator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -188,22 +186,7 @@ class Pomodoro : Fragment() {
         clockTimer.text = String.format("%02d:%02d", minutes, seconds)
 
         val progress = ((totalTime - currentTime) * 100 / totalTime).toInt()
-        
-        // Cancel any existing animation
-        progressAnimator?.cancel()
-        
-        // Create and start new animation
-        progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", progressBar.progress, progress).apply {
-            duration = 100 // Match the timer update interval
-            setAutoCancel(true)
-            start()
-        }
-    }
+        progressBar.progress = progress
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // Cancel any running animation when the view is destroyed
-        progressAnimator?.cancel()
-        progressAnimator = null
     }
 }
