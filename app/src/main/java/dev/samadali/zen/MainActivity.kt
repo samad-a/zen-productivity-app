@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.setItemActiveIndicatorEnabled(false)
 
+        bottomNavigation.selectedItemId = R.id.pomodoro
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.flFragment, Pomodoro())

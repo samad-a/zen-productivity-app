@@ -13,32 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/studyMinutes"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="310dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="minutes"
-                android:textColor="@color/dark_green"
-                android:textSize="24sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/pomodoroTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:text="pomodoro"
             android:textColor="@color/dark_green"
             android:textSize="60sp"
@@ -46,132 +25,189 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/breakMinutes"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="310dp"
-            android:layout_marginEnd="100dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pomodoroTitleText">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="minutes"
-                android:textColor="@color/dark_green"
-                android:textSize="24sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.25">
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="mins"
-            android:textColor="@color/dark_green"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/studyMinutes"
-            app:layout_constraintStart_toEndOf="@+id/studyMinutes" />
+                <TextView
+                    android:id="@+id/streakText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="keep your streak!"
+                    android:textColor="#898989"
+                    app:layout_constraintBottom_toTopOf="@+id/streakImage"
+                    app:layout_constraintEnd_toEndOf="@+id/streakImage"
+                    app:layout_constraintStart_toStartOf="@+id/streakImage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="study"
-            android:textColor="@color/dark_green"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/studyMinutes"
-            app:layout_constraintEnd_toEndOf="@+id/studyMinutes"
-            app:layout_constraintStart_toStartOf="@+id/studyMinutes" />
+                <ImageView
+                    android:id="@+id/streakImage"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/gray_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="break"
-            android:textColor="@color/dark_green"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/breakMinutes"
-            app:layout_constraintEnd_toEndOf="@+id/breakMinutes"
-            app:layout_constraintStart_toStartOf="@+id/breakMinutes" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="mins"
-            android:textColor="@color/dark_green"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/breakMinutes"
-            app:layout_constraintStart_toEndOf="@+id/breakMinutes" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="65"
-            app:indicatorSize="300dp"
-            app:trackThickness="20dp"
-            app:trackCornerRadius="10dp"
-            app:trackColor="@color/light_green"
-            app:indicatorColor="@color/dark_green"
-            app:layout_constraintBottom_toBottomOf="@+id/textView8"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toTopOf="@+id/textView8" />
+                <TextView
+                    android:id="@+id/clockTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25:00"
+                    android:textColor="@color/dark_green"
+                    android:textSize="60sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                    app:layout_constraintStart_toStartOf="@+id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
-        <Button
-            android:id="@+id/startStopButton"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:layout_marginTop="40dp"
-            android:text="Start"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="65"
+                    app:indicatorColor="@color/dark_green"
+                    app:indicatorSize="300dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/light_green"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="20dp" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="keep your streak!"
-            android:textColor="#898989"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/gray_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:text="25:00"
-            android:textColor="@color/dark_green"
-            android:textSize="60sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <Button
+                    android:id="@+id/startStopButton"
+                    android:layout_width="200dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="0"
+                    android:text="Start"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/studyMinutes"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/studyTextInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:hint="minutes"
+                            android:textColor="@color/dark_green"
+                            android:textSize="24sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/studyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="study"
+                        android:textColor="@color/dark_green"
+                        android:textSize="34sp"
+                        app:layout_constraintBottom_toTopOf="@+id/studyMinutes"
+                        app:layout_constraintEnd_toEndOf="@+id/studyMinutes"
+                        app:layout_constraintStart_toStartOf="@+id/studyMinutes" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/breakMinutes"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/breakTextInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:hint="minutes"
+                            android:textColor="@color/dark_green"
+                            android:textSize="24sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/breakText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="break"
+                        android:textColor="@color/dark_green"
+                        android:textSize="34sp"
+                        app:layout_constraintBottom_toTopOf="@+id/breakMinutes"
+                        app:layout_constraintEnd_toEndOf="@+id/breakMinutes"
+                        app:layout_constraintStart_toStartOf="@+id/breakMinutes" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
