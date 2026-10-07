@@ -1,6 +1,7 @@
 package dev.samadali.zen.pomodoro
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -32,15 +33,15 @@ class PomodoroTimerTest {
         assertEquals(25L, PomodoroTimer.studyMinutes)
         assertEquals(5L, PomodoroTimer.breakMinutes)
         assertEquals(Phase.STUDY, PomodoroTimer.phase.value)
-        assertEquals(25 * 60 * 1000L, PomodoroTimer.remainingMillis.value)
+        assertEquals(25 * 60 * 1000L, PomodoroTimer.remainingMillis.current)
     }
 
     @Test
     fun setStudyMinutes_resetsTheIdleStudyPhase() = onMain {
         PomodoroTimer.setStudyMinutes(40)
 
-        assertEquals(40 * 60 * 1000L, PomodoroTimer.totalMillis.value)
-        assertEquals(40 * 60 * 1000L, PomodoroTimer.remainingMillis.value)
+        assertEquals(40 * 60 * 1000L, PomodoroTimer.totalMillis.current)
+        assertEquals(40 * 60 * 1000L, PomodoroTimer.remainingMillis.current)
     }
 
     @Test
@@ -48,7 +49,7 @@ class PomodoroTimerTest {
         PomodoroTimer.setBreakMinutes(10)
 
         assertEquals(10L, PomodoroTimer.breakMinutes)
-        assertEquals(25 * 60 * 1000L, PomodoroTimer.remainingMillis.value)
+        assertEquals(25 * 60 * 1000L, PomodoroTimer.remainingMillis.current)
     }
 
     @Test
@@ -60,8 +61,11 @@ class PomodoroTimerTest {
 
         assertEquals(50L, PomodoroTimer.studyMinutes)
         assertEquals(15L, PomodoroTimer.breakMinutes)
-        assertEquals(50 * 60 * 1000L, PomodoroTimer.remainingMillis.value)
+        assertEquals(50 * 60 * 1000L, PomodoroTimer.remainingMillis.current)
     }
+
+    private val LiveData<Long>.current: Long
+        get() = checkNotNull(value) { "LiveData has no value" }
 
     private fun clearPrefs() {
         context.getSharedPreferences("pomodoro", Context.MODE_PRIVATE).edit().clear().commit()
