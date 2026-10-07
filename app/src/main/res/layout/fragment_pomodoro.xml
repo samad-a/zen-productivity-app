@@ -149,6 +149,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:hint="minutes"
+                            android:inputType="number"
+                            android:maxLength="3"
                             android:textColor="@color/dark_green"
                             android:textSize="24sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -189,6 +191,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:hint="minutes"
+                            android:inputType="number"
+                            android:maxLength="3"
                             android:textColor="@color/dark_green"
                             android:textSize="24sp" />
                     </com.google.android.material.textfield.TextInputLayout>

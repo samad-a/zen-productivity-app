@@ -16,6 +16,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
+import java.util.Locale
 
 class PomodoroViewModel : androidx.lifecycle.ViewModel() {
     private val _currentTimeInMillis = MutableLiveData(0L)
@@ -132,15 +133,6 @@ class Pomodoro : Fragment() {
             startStopButton.text = if (isRunning) "Stop" else "Start"
         })
 
-        viewModel.isStudyTime.observe(viewLifecycleOwner, Observer { isStudy ->
-            // Update input fields based on current phase
-            if (isStudy) {
-                studyTextInput.setText((viewModel.currentTimeInMillis.value!! / 1000 / 60).toString())
-            } else {
-                breakTextInput.setText((viewModel.currentTimeInMillis.value!! / 1000 / 60).toString())
-            }
-        })
-
         // Set initial values
         studyTextInput.setText(viewModel.studyDuration.toString())
         breakTextInput.setText(viewModel.breakDuration.toString())
@@ -183,10 +175,9 @@ class Pomodoro : Fragment() {
     private fun updateTimerUI(currentTime: Long, totalTime: Long) {
         val minutes = (currentTime / 1000) / 60
         val seconds = (currentTime / 1000) % 60
-        clockTimer.text = String.format("%02d:%02d", minutes, seconds)
+        clockTimer.text = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
 
-        val progress = ((totalTime - currentTime) * 100 / totalTime).toInt()
+        val progress = if (totalTime > 0) ((totalTime - currentTime) * 100 / totalTime).toInt() else 0
         progressBar.progress = progress
-
     }
 }
