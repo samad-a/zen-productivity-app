@@ -50,7 +50,7 @@ class Pomodoro : Fragment() {
         }
 
         PomodoroTimer.isRunning.observe(viewLifecycleOwner) { isRunning ->
-            startStopButton.text = if (isRunning) "Pause" else "Start"
+            startStopButton.text = getString(if (isRunning) R.string.pause else R.string.start)
             studyTextInput.isEnabled = !isRunning
             breakTextInput.isEnabled = !isRunning
         }

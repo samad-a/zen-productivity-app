@@ -29,7 +29,7 @@
                 android:id="@+id/taskNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="Task Name" />
+                android:hint="@string/task_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +44,7 @@
                 android:id="@+id/taskDescriptionInput"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:hint="Task Description" />
+                android:hint="@string/task_description" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,11 +54,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/addTaskButton"
                 android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="Add Task"
+                android:text="@string/add_task"
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"

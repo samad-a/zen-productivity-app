@@ -24,7 +24,7 @@ class AddTask : Fragment() {
 
         taskNameInput = view.findViewById(R.id.taskNameInput)
         taskDescriptionInput = view.findViewById(R.id.taskDescriptionInput)
-        addTaskButton = view.findViewById(R.id.button7)
+        addTaskButton = view.findViewById(R.id.addTaskButton)
 
         addTaskButton.setOnClickListener {
             val taskName = taskNameInput.text.toString().trim()
@@ -34,7 +34,7 @@ class AddTask : Fragment() {
                 viewModel.addTask(taskName, taskDescription)
                 requireActivity().supportFragmentManager.popBackStack()
             } else {
-                taskNameInput.error = "Please enter a task name"
+                taskNameInput.error = getString(R.string.error_task_name_required)
             }
         }
 

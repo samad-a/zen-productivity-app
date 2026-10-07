@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity(){
         val googleSignInButton = findViewById<SignInButton>(R.id.btn_google_sign_in)
         googleSignInButton.setSize(SignInButton.SIZE_WIDE)
 
-        val loginButton = findViewById<Button>(R.id.button4)
+        val loginButton = findViewById<Button>(R.id.loginButton)
 
         loginButton.setOnClickListener {
             // Clear the landing/login screens so back from the app doesn't return to them

@@ -47,8 +47,8 @@ class Tasks : Fragment() {
                 if (position == RecyclerView.NO_POSITION) return
                 val task = taskAdapter.getItem(position)
                 viewModel.deleteTask(task)
-                Snackbar.make(view, "Task deleted", Snackbar.LENGTH_LONG)
-                    .setAction("Undo") { viewModel.restoreTask(task) }
+                Snackbar.make(view, R.string.task_deleted, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.undo) { viewModel.restoreTask(task) }
                     .show()
             }
         }).attachToRecyclerView(recyclerView)

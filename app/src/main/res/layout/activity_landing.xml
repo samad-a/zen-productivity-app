@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginButton"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/green"
         android:fontFamily="sans-serif"
         android:outlineProvider="paddedBounds"
-        android:text="log in"
+        android:text="@string/log_in"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -39,20 +39,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signupButton"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/green"
         android:fontFamily="sans-serif"
-        android:text="sign up"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <ImageView
         android:id="@+id/imageView2"
