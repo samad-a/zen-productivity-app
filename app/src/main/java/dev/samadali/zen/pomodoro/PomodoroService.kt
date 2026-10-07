@@ -71,7 +71,7 @@ class PomodoroService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     /** Updates the countdown notification and keeps the CPU awake until the phase ends. */
-    @SuppressLint("MissingPermission", "WakelockTimeout")
+    @SuppressLint("MissingPermission")
     private fun refresh() {
         if (PomodoroTimer.isRunning.value != true) return
         wakeLock.acquire(PomodoroTimer.remainingNow() + WAKE_LOCK_MARGIN_MS)

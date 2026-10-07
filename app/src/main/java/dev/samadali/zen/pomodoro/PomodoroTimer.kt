@@ -20,6 +20,12 @@ enum class Phase { STUDY, BREAK }
  */
 object PomodoroTimer {
     private const val TICK_MS = 100L
+    private const val DEFAULT_STUDY_MINUTES = 25L
+    private const val DEFAULT_BREAK_MINUTES = 5L
+    private const val KEY_STUDY_MINUTES = "study_minutes"
+    private const val KEY_BREAK_MINUTES = "break_minutes"
+    private const val KEY_PHASE = "phase"
+    private const val KEY_REMAINING = "remaining"
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var prefs: SharedPreferences
@@ -37,9 +43,9 @@ object PomodoroTimer {
     private val _isRunning = MutableLiveData(false)
     val isRunning: LiveData<Boolean> = _isRunning
 
-    var studyMinutes = 25L
+    var studyMinutes = DEFAULT_STUDY_MINUTES
         private set
-    var breakMinutes = 5L
+    var breakMinutes = DEFAULT_BREAK_MINUTES
         private set
 
     /** Called on the main thread when a phase runs out, with the phase that just ended. */
@@ -59,13 +65,13 @@ object PomodoroTimer {
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("pomodoro", Context.MODE_PRIVATE)
-        studyMinutes = prefs.getLong("study_minutes", 25L)
-        breakMinutes = prefs.getLong("break_minutes", 5L)
+        studyMinutes = prefs.getLong(KEY_STUDY_MINUTES, DEFAULT_STUDY_MINUTES)
+        breakMinutes = prefs.getLong(KEY_BREAK_MINUTES, DEFAULT_BREAK_MINUTES)
 
-        val phase = runCatching { Phase.valueOf(prefs.getString("phase", null)!!) }
+        val phase = runCatching { Phase.valueOf(prefs.getString(KEY_PHASE, null)!!) }
             .getOrDefault(Phase.STUDY)
         val total = durationOf(phase)
-        val remaining = prefs.getLong("remaining", total)
+        val remaining = prefs.getLong(KEY_REMAINING, total)
         _phase.value = phase
         _totalMillis.value = total
         _remainingMillis.value = if (remaining in 1..total) remaining else total
@@ -89,13 +95,13 @@ object PomodoroTimer {
 
     fun setStudyMinutes(minutes: Long) {
         studyMinutes = minutes
-        prefs.edit { putLong("study_minutes", minutes) }
+        prefs.edit { putLong(KEY_STUDY_MINUTES, minutes) }
         if (_phase.value == Phase.STUDY && _isRunning.value != true) resetPhase()
     }
 
     fun setBreakMinutes(minutes: Long) {
         breakMinutes = minutes
-        prefs.edit { putLong("break_minutes", minutes) }
+        prefs.edit { putLong(KEY_BREAK_MINUTES, minutes) }
         if (_phase.value == Phase.BREAK && _isRunning.value != true) resetPhase()
     }
 
@@ -127,8 +133,8 @@ object PomodoroTimer {
 
     private fun saveProgress() {
         prefs.edit {
-            putString("phase", _phase.value?.name)
-            putLong("remaining", _remainingMillis.value ?: 0L)
+            putString(KEY_PHASE, _phase.value?.name)
+            putLong(KEY_REMAINING, _remainingMillis.value ?: 0L)
         }
     }
 

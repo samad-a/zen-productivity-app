@@ -1,10 +1,7 @@
 package dev.samadali.zen.tasks
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -12,26 +9,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dev.samadali.zen.R
+import dev.samadali.zen.databinding.FragmentTasksBinding
 
-class TasksFragment : Fragment() {
+class TasksFragment : Fragment(R.layout.fragment_tasks) {
     private val viewModel: TaskViewModel by activityViewModels()
-    private lateinit var taskAdapter: TaskAdapter
-    private lateinit var addNewTaskButton: Button
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_tasks, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = FragmentTasksBinding.bind(view)
 
-        // Initialize RecyclerView
-        val recyclerView = view.findViewById<RecyclerView>(R.id.tasksRecyclerView)
-        taskAdapter = TaskAdapter { task ->
+        val taskAdapter = TaskAdapter { task ->
             viewModel.toggleTaskCompletion(task)
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = taskAdapter
+        binding.tasksRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.tasksRecyclerView.adapter = taskAdapter
 
         // Swipe a task sideways to delete it, with an undo option
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -46,29 +36,24 @@ class TasksFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 if (position == RecyclerView.NO_POSITION) return
-                val task = taskAdapter.getItem(position)
+                val task = taskAdapter.currentList[position]
                 viewModel.deleteTask(task)
                 Snackbar.make(view, R.string.task_deleted, Snackbar.LENGTH_LONG)
                     .setAction(R.string.undo) { viewModel.restoreTask(task) }
                     .setAnchorView(requireActivity().findViewById(R.id.bottomNavigationView))
                     .show()
             }
-        }).attachToRecyclerView(recyclerView)
+        }).attachToRecyclerView(binding.tasksRecyclerView)
 
-        // Initialize add task button
-        addNewTaskButton = view.findViewById(R.id.addNewTaskButton)
-        addNewTaskButton.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
+        binding.addNewTaskButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
                 .replace(R.id.flFragment, AddTaskFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        // Observe tasks
         viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
             taskAdapter.submitList(tasks)
         }
-
-        return view
     }
 }

@@ -2,11 +2,12 @@ package dev.samadali.zen.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import dev.samadali.zen.R
+import dev.samadali.zen.databinding.ActivitySignupBinding
 
-class SignupActivity : AppCompatActivity(){
+// TODO: implement account creation; the sign up button currently does nothing
+class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(ActivitySignupBinding.inflate(layoutInflater).root)
     }
 }

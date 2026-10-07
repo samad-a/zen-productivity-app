@@ -1,42 +1,36 @@
 package dev.samadali.zen.tasks
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.samadali.zen.R
 import dev.samadali.zen.data.Task
+import dev.samadali.zen.databinding.TaskItemBinding
 
-class TaskAdapter(private val onTaskClick: (Task) -> Unit) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
+class TaskAdapter(private val onTaskClick: (Task) -> Unit) :
+    ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.task_item, parent, false)
-        return TaskViewHolder(view)
+        val binding = TaskItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TaskViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    public override fun getItem(position: Int): Task = super.getItem(position)
-
-    inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
-        private val taskName: TextView = itemView.findViewById(R.id.tvTaskName)
-        private val taskDescription: TextView = itemView.findViewById(R.id.tvTaskDescription)
+    inner class TaskViewHolder(private val binding: TaskItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: Task) {
-            taskName.text = task.name
-            taskDescription.text = task.description
-            taskDescription.visibility = if (task.description.isBlank()) View.GONE else View.VISIBLE
-            checkBox.isChecked = task.isCompleted
+            binding.tvTaskName.text = task.name
+            binding.tvTaskDescription.text = task.description
+            binding.tvTaskDescription.isVisible = task.description.isNotBlank()
+            binding.checkBox.isChecked = task.isCompleted
 
-            checkBox.setOnClickListener {
+            binding.checkBox.setOnClickListener {
                 onTaskClick(task)
             }
         }
