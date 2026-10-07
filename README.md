@@ -15,7 +15,7 @@ calendar, stats and settings.
 
 ## Building
 
-Requirements: Android Studio (or JDK 17+) and the Android SDK with API 35.
+Requirements: Android Studio (or JDK 17+) and the Android SDK with API 36.
 
 ```bash
 ./gradlew assembleDebug        # build the debug APK
