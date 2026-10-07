@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Zen</string>
+
+    <string name="channel_timer">Pomodoro timer</string>
+    <string name="channel_phase_alerts">Pomodoro alerts</string>
+    <string name="notification_study_in_progress">Study session in progress</string>
+    <string name="notification_break_in_progress">Break in progress</string>
+    <string name="notification_study_finished">Study session finished, time for a break!</string>
+    <string name="notification_break_finished">Break over, back to studying!</string>
 </resources>

@@ -1,7 +1,9 @@
 package dev.samadali.zen
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -9,114 +11,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Locale
 
-class PomodoroViewModel : androidx.lifecycle.ViewModel() {
-    private val _currentTimeInMillis = MutableLiveData(0L)
-    val currentTimeInMillis: LiveData<Long> = _currentTimeInMillis
-
-    private val _totalTimeInMillis = MutableLiveData(0L)
-    val totalTimeInMillis: LiveData<Long> = _totalTimeInMillis
-
-    private val _isTimerRunning = MutableLiveData(false)
-    val isTimerRunning: LiveData<Boolean> = _isTimerRunning
-
-    private val _isStudyTime = MutableLiveData(true)
-    val isStudyTime: LiveData<Boolean> = _isStudyTime
-
-    var timer: CountDownTimer? = null
-    var studyDuration = 25L
-    var breakDuration = 5L
-
-    init {
-        // Initialize timer if it's not already running
-        if (!_isTimerRunning.value!! && _currentTimeInMillis.value == 0L) {
-            _currentTimeInMillis.value = studyDuration * 60 * 1000
-            _totalTimeInMillis.value = _currentTimeInMillis.value
-        }
-    }
-
-    fun startTimer() {
-        if (_isTimerRunning.value == true) return
-
-        val duration = if (_isStudyTime.value == true) {
-            studyDuration
-        } else {
-            breakDuration
-        }
-
-        if (_currentTimeInMillis.value == 0L) {
-            _totalTimeInMillis.value = duration * 60 * 1000
-            _currentTimeInMillis.value = _totalTimeInMillis.value
-        }
-
-        timer = object : CountDownTimer(_currentTimeInMillis.value!!, 100) { // Update every 100ms for smoother animation
-            override fun onTick(millisUntilFinished: Long) {
-                _currentTimeInMillis.value = millisUntilFinished
-            }
-
-            override fun onFinish() {
-                _isStudyTime.value = !(_isStudyTime.value ?: true)
-                _currentTimeInMillis.value = 0L
-                startTimer() // Automatically start the next phase
-            }
-        }.start()
-
-        _isTimerRunning.value = true
-    }
-
-    fun stopTimer() {
-        timer?.cancel()
-        _isTimerRunning.value = false
-    }
-
-    fun updateStudyDuration(minutes: Long) {
-        studyDuration = minutes
-        if (_isStudyTime.value == true && _isTimerRunning.value != true) {
-            _currentTimeInMillis.value = minutes * 60 * 1000
-            _totalTimeInMillis.value = _currentTimeInMillis.value
-        }
-    }
-
-    fun updateBreakDuration(minutes: Long) {
-        breakDuration = minutes
-        if (_isStudyTime.value != true && _isTimerRunning.value != true) {
-            _currentTimeInMillis.value = minutes * 60 * 1000
-            _totalTimeInMillis.value = _currentTimeInMillis.value
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        stopTimer()
-    }
-}
-
 class Pomodoro : Fragment() {
-    private val viewModel: PomodoroViewModel by activityViewModels()
     private lateinit var clockTimer: TextView
     private lateinit var progressBar: CircularProgressIndicator
     private lateinit var startStopButton: Button
     private lateinit var studyTextInput: TextInputEditText
     private lateinit var breakTextInput: TextInputEditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    // The timer still runs if notifications are denied, it just can't alert the user.
+    private val requestNotificationPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            PomodoroTimer.start(requireContext())
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pomodoro, container, false)
-        
+
         // Initialize views
         clockTimer = view.findViewById(R.id.clockTimer)
         progressBar = view.findViewById(R.id.progressBar)
@@ -125,53 +45,60 @@ class Pomodoro : Fragment() {
         breakTextInput = view.findViewById(R.id.breakTextInput)
 
         // Set up observers
-        viewModel.currentTimeInMillis.observe(viewLifecycleOwner, Observer { time ->
-            updateTimerUI(time, viewModel.totalTimeInMillis.value ?: time)
-        })
+        PomodoroTimer.remainingMillis.observe(viewLifecycleOwner) { time ->
+            updateTimerUI(time, PomodoroTimer.totalMillis.value ?: time)
+        }
 
-        viewModel.isTimerRunning.observe(viewLifecycleOwner, Observer { isRunning ->
-            startStopButton.text = if (isRunning) "Stop" else "Start"
-        })
+        PomodoroTimer.isRunning.observe(viewLifecycleOwner) { isRunning ->
+            startStopButton.text = if (isRunning) "Pause" else "Start"
+            studyTextInput.isEnabled = !isRunning
+            breakTextInput.isEnabled = !isRunning
+        }
 
         // Set initial values
-        studyTextInput.setText(viewModel.studyDuration.toString())
-        breakTextInput.setText(viewModel.breakDuration.toString())
+        studyTextInput.setText(PomodoroTimer.studyMinutes.toString())
+        breakTextInput.setText(PomodoroTimer.breakMinutes.toString())
 
         // Set up text change listeners
         studyTextInput.addTextChangedListener(createTextWatcher(true))
         breakTextInput.addTextChangedListener(createTextWatcher(false))
 
-        // Set up click listener for start/stop button
+        // Set up click listener for start/pause button
         startStopButton.setOnClickListener {
-            if (viewModel.isTimerRunning.value == true) {
-                viewModel.stopTimer()
-            } else {
-                viewModel.startTimer()
+            when {
+                PomodoroTimer.isRunning.value == true -> PomodoroTimer.pause()
+                needsNotificationPermission() ->
+                    requestNotificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+                else -> PomodoroTimer.start(requireContext())
             }
         }
 
         return view
     }
 
+    private fun needsNotificationPermission(): Boolean =
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) !=
+            PackageManager.PERMISSION_GRANTED
+
     private fun createTextWatcher(isStudy: Boolean): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (viewModel.isTimerRunning.value != true) {
+                if (PomodoroTimer.isRunning.value != true) {
                     val minutes = s.toString().toLongOrNull() ?: 0L
                     if (minutes > 0) {
                         if (isStudy) {
-                            viewModel.updateStudyDuration(minutes)
+                            PomodoroTimer.setStudyMinutes(minutes)
                         } else {
-                            viewModel.updateBreakDuration(minutes)
+                            PomodoroTimer.setBreakMinutes(minutes)
                         }
                     }
                 }
             }
         }
     }
-
     private fun updateTimerUI(currentTime: Long, totalTime: Long) {
         val minutes = (currentTime / 1000) / 60
         val seconds = (currentTime / 1000) % 60
