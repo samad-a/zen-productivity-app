@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "dev.samadali.zen"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "dev.samadali.zen"
