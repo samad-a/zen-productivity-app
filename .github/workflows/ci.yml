@@ -23,7 +23,7 @@ jobs:
 
       - name: Upload lint report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
@@ -59,7 +59,7 @@ jobs:
 
       - name: Upload instrumented test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: instrumented-test-report
           path: app/build/reports/androidTests/connected/
