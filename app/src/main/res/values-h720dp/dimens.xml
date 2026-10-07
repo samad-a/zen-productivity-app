@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="timer_max_size">320dp</dimen>
+    <dimen name="text_title">56sp</dimen>
+</resources>

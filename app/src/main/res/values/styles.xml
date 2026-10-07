@@ -39,4 +39,21 @@
         <item name="android:textSize">@dimen/text_heading</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Rounded outlined box for the study/break minute inputs -->
+    <style name="Widget.Zen.DurationInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_medium</item>
+    </style>
+
+    <style name="Widget.Zen.DurationInput.EditText" parent="">
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">3</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_heading</item>
+    </style>
 </resources>
