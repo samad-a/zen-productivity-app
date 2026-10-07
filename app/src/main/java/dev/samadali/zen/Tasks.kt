@@ -49,6 +49,7 @@ class Tasks : Fragment() {
                 viewModel.deleteTask(task)
                 Snackbar.make(view, R.string.task_deleted, Snackbar.LENGTH_LONG)
                     .setAction(R.string.undo) { viewModel.restoreTask(task) }
+                    .setAnchorView(requireActivity().findViewById(R.id.bottomNavigationView))
                     .show()
             }
         }).attachToRecyclerView(recyclerView)
