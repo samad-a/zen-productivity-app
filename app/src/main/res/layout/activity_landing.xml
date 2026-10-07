@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
     android:clipChildren="false"
-    tools:context=".LandingActivity">
+    tools:context=".auth.LandingActivity">
 
     <ImageView
         android:id="@+id/imageView"

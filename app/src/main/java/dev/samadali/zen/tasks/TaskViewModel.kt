@@ -1,9 +1,11 @@
-package dev.samadali.zen
+package dev.samadali.zen.tasks
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import dev.samadali.zen.ZenApp
+import dev.samadali.zen.data.Task
 import kotlinx.coroutines.launch
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {

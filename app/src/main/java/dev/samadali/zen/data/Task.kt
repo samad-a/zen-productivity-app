@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

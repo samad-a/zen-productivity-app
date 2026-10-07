@@ -1,12 +1,13 @@
-package dev.samadali.zen
+package dev.samadali.zen.stats
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import dev.samadali.zen.R
 
-class Stats : Fragment() {
+class StatsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

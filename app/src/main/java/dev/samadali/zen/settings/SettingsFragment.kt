@@ -1,14 +1,17 @@
-package dev.samadali.zen
+package dev.samadali.zen.settings
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import dev.samadali.zen.R
+import dev.samadali.zen.auth.LandingActivity
+import dev.samadali.zen.pomodoro.PomodoroTimer
 
-class Settings : Fragment() {
+class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

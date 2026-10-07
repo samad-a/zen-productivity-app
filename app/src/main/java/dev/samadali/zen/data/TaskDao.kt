@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.pomodoro
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -16,9 +16,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
+import dev.samadali.zen.R
 import java.util.Locale
 
-class Pomodoro : Fragment() {
+class PomodoroFragment : Fragment() {
     private lateinit var clockTimer: TextView
     private lateinit var progressBar: CircularProgressIndicator
     private lateinit var startStopButton: Button

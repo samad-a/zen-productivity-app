@@ -1,6 +1,8 @@
 package dev.samadali.zen
 
 import android.app.Application
+import dev.samadali.zen.data.ZenDatabase
+import dev.samadali.zen.pomodoro.PomodoroTimer
 
 class ZenApp : Application() {
     val database: ZenDatabase by lazy { ZenDatabase.create(this) }

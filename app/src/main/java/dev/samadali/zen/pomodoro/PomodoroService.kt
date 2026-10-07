@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.pomodoro
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -14,6 +14,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.lifecycle.Observer
+import dev.samadali.zen.MainActivity
+import dev.samadali.zen.R
 
 /**
  * Foreground service that keeps the pomodoro timer alive while the app is in the

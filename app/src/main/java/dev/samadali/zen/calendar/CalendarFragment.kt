@@ -1,12 +1,13 @@
-package dev.samadali.zen
+package dev.samadali.zen.calendar
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import dev.samadali.zen.R
 
-class Calendar : Fragment() {
+class CalendarFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

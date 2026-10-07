@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.pomodoro
 
 import android.content.Context
 import android.content.Intent

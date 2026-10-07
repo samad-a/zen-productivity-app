@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.textfield.TextInputEditText
+import dev.samadali.zen.R
 
-class AddTask : Fragment() {
+class AddTaskFragment : Fragment() {
     private val viewModel: TaskViewModel by activityViewModels()
     private lateinit var taskNameInput: TextInputEditText
     private lateinit var taskDescriptionInput: TextInputEditText

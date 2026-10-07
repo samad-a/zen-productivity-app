@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dev.samadali.zen.R
 
-class Tasks : Fragment() {
+class TasksFragment : Fragment() {
     private val viewModel: TaskViewModel by activityViewModels()
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var addNewTaskButton: Button
@@ -58,7 +59,7 @@ class Tasks : Fragment() {
         addNewTaskButton = view.findViewById(R.id.addNewTaskButton)
         addNewTaskButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.flFragment, AddTask())
+                .replace(R.id.flFragment, AddTaskFragment())
                 .addToBackStack(null)
                 .commit()
         }

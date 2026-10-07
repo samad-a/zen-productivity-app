@@ -1,4 +1,4 @@
-package dev.samadali.zen
+package dev.samadali.zen.data
 
 import android.content.Context
 import androidx.room.Database
