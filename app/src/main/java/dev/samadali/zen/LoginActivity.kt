@@ -17,7 +17,9 @@ class LoginActivity : AppCompatActivity(){
         val loginButton = findViewById<Button>(R.id.button4)
 
         loginButton.setOnClickListener {
+            // Clear the landing/login screens so back from the app doesn't return to them
             val intent = Intent(this, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
     }
