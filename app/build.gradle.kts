@@ -39,6 +39,11 @@ android {
     }
 }
 
+ksp {
+    // Export the Room schema so database migrations can be reviewed and tested
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
 
     implementation("com.google.android.gms:play-services-auth:21.0.0")
