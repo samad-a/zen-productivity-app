@@ -30,8 +30,8 @@ Requirements: Android Studio (or JDK 17+) and the Android SDK with API 36.
 ./gradlew lintDebug                    # Android lint
 ```
 
-CI (`.github/workflows/ci.yml`) runs lint, unit tests and a debug build on every push to `main` and on pull
-requests.
+CI (`.github/workflows/ci.yml`) runs lint, unit tests and a debug build, and the instrumented tests on an API 35
+emulator, on every push to `main` and on pull requests.
 
 Note: the instrumented tests reset the app's saved pomodoro durations on the device they run on.
 
