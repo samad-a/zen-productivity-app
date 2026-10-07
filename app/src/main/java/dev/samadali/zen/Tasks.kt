@@ -1,6 +1,5 @@
 package dev.samadali.zen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 class Tasks : Fragment() {
     private val viewModel: TaskViewModel by activityViewModels()
@@ -28,22 +29,29 @@ class Tasks : Fragment() {
         taskAdapter = TaskAdapter { task ->
             viewModel.toggleTaskCompletion(task)
         }
-        
-        // Create a custom layout manager that centers items
-        val layoutManager = object : LinearLayoutManager(context) {
-            override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
-                val width = recyclerView.width
-                if (width > 0) {
-                    lp.width = (width * 0.9).toInt() // Make items take up 90% of the width
-                }
-                return true
-            }
-        }.apply {
-            orientation = LinearLayoutManager.VERTICAL
-        }
-        
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = taskAdapter
+
+        // Swipe a task sideways to delete it, with an undo option
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                if (position == RecyclerView.NO_POSITION) return
+                val task = taskAdapter.getItem(position)
+                viewModel.deleteTask(task)
+                Snackbar.make(view, "Task deleted", Snackbar.LENGTH_LONG)
+                    .setAction("Undo") { viewModel.restoreTask(task) }
+                    .show()
+            }
+        }).attachToRecyclerView(recyclerView)
 
         // Initialize add task button
         addNewTaskButton = view.findViewById(R.id.addNewTaskButton)

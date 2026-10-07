@@ -1,29 +1,35 @@
 package dev.samadali.zen
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class TaskViewModel : ViewModel() {
-    private val _tasks = MutableLiveData<List<Task>>()
-    val tasks: LiveData<List<Task>> = _tasks
+class TaskViewModel(application: Application) : AndroidViewModel(application) {
+    private val dao = getApplication<ZenApp>().database.taskDao()
 
-    private val taskList = mutableListOf<Task>()
+    val tasks: LiveData<List<Task>> = dao.getAll()
 
-    init {
-        _tasks.value = taskList
-    }
-
-    fun addTask(task: Task) {
-        taskList.add(task)
-        _tasks.value = taskList.toList()
+    fun addTask(name: String, description: String) {
+        viewModelScope.launch { dao.insert(Task(name = name, description = description)) }
     }
 
     fun toggleTaskCompletion(task: Task) {
-        val index = taskList.indexOfFirst { it.name == task.name }
-        if (index != -1) {
-            taskList[index] = task.copy(isCompleted = !task.isCompleted)
-            _tasks.value = taskList.toList()
-        }
+        val completed = !task.isCompleted
+        val updated = task.copy(
+            isCompleted = completed,
+            completedAt = if (completed) System.currentTimeMillis() else null
+        )
+        viewModelScope.launch { dao.update(updated) }
     }
-} 
+
+    fun deleteTask(task: Task) {
+        viewModelScope.launch { dao.delete(task) }
+    }
+
+    /** Re-inserts a deleted task with its original id, for undo. */
+    fun restoreTask(task: Task) {
+        viewModelScope.launch { dao.insert(task) }
+    }
+}

@@ -21,12 +21,17 @@ class TaskAdapter(private val onTaskClick: (Task) -> Unit) : ListAdapter<Task, T
         holder.bind(getItem(position))
     }
 
+    public override fun getItem(position: Int): Task = super.getItem(position)
+
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         private val taskName: TextView = itemView.findViewById(R.id.tvTaskName)
+        private val taskDescription: TextView = itemView.findViewById(R.id.tvTaskDescription)
 
         fun bind(task: Task) {
             taskName.text = task.name
+            taskDescription.text = task.description
+            taskDescription.visibility = if (task.description.isBlank()) View.GONE else View.VISIBLE
             checkBox.isChecked = task.isCompleted
 
             checkBox.setOnClickListener {
@@ -37,11 +42,11 @@ class TaskAdapter(private val onTaskClick: (Task) -> Unit) : ListAdapter<Task, T
 
     private class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem == newItem
         }
     }
-} 
+}
