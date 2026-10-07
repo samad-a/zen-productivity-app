@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Green button with dark green bold text: 4.2:1, which passes for bold text of 14sp+ -->
+    <style name="Widget.Zen.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/green</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="cornerRadius">@dimen/corner_large</item>
+    </style>
+
+    <!-- Secondary action on a light green fill, e.g. "+ Add new task" -->
+    <style name="Widget.Zen.Button.Tonal">
+        <item name="backgroundTint">@color/light_green</item>
+    </style>
+
+    <style name="Widget.Zen.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:minHeight">@dimen/touch_target</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_body_large</item>
+    </style>
+
+    <!-- Marks text as a heading for screen readers on API 28+, see values-v28 -->
+    <style name="Widget.Zen.Heading" parent="" />
+
+    <!-- Screen title: shrinks to fit on narrow screens or at large font sizes instead of wrapping -->
+    <style name="Widget.Zen.Title" parent="Widget.Zen.Heading">
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_title_min</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_title</item>
+        <item name="android:textSize">@dimen/text_title</item>
+    </style>
+
+    <style name="Widget.Zen.SectionHeading" parent="Widget.Zen.Heading">
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_heading</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

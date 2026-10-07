@@ -69,7 +69,6 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:text="@string/add_task"
-                android:textColor="@color/white"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

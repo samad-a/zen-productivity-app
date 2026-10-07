@@ -1,7 +1,11 @@
 package dev.samadali.zen
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import dev.samadali.zen.calendar.CalendarFragment
@@ -13,11 +17,27 @@ import dev.samadali.zen.tasks.TasksFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bottomNavigation = binding.bottomNavigationView
+        // The navigation bar pads itself for the gesture/nav bar; the screens above it
+        // need room for the status bar, camera cutout and, while typing, the keyboard.
+        ViewCompat.setOnApplyWindowInsetsListener(binding.flFragment) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = (ime.bottom - bottomNavigation.height).coerceAtLeast(0)
+            )
+            insets
+        }
         bottomNavigation.setItemActiveIndicatorEnabled(false)
 
         if (savedInstanceState == null) {
