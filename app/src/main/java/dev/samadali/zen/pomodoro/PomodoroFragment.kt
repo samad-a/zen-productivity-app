@@ -1,6 +1,7 @@
 package dev.samadali.zen.pomodoro
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -49,6 +50,8 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
         }
     }
 
+    // Plain ASCII digits on purpose, so the value parses back with toLongOrNull
+    @SuppressLint("SetTextI18n")
     private fun bindDurationInput(input: EditText, initialMinutes: Long, onChanged: (Long) -> Unit) {
         input.setText(initialMinutes.toString())
         input.doAfterTextChanged { text ->
