@@ -14,8 +14,8 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
         val binding = FragmentAddTaskBinding.bind(view)
 
         binding.addTaskButton.setOnClickListener {
-            val taskName = binding.taskNameInput.text.toString().trim()
-            val taskDescription = binding.taskDescriptionInput.text.toString().trim()
+            val taskName = binding.taskNameInput.text?.toString().orEmpty().trim()
+            val taskDescription = binding.taskDescriptionInput.text?.toString().orEmpty().trim()
 
             if (taskName.isNotEmpty()) {
                 viewModel.addTask(taskName, taskDescription)
