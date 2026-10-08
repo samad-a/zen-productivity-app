@@ -24,6 +24,12 @@
     <!-- Unchecked switch track -->
     <color name="switch_track_off">#FFEFEFEF</color>
 
+    <!-- Logo petals, the same in both themes -->
+    <color name="logo_petal_left">#FF9ED08E</color>
+    <color name="logo_petal_right">#FFDCF2D5</color>
+    <color name="logo_petal_centre">#FFC8EFBB</color>
+    <color name="launcher_background">#FFFFFFFF</color>
+
     <!--
     Heatmap shades for 0, 1, 2-3 and 4+ sessions. Day numbers are dark_green on the first
     three (6.3:1 and 4.7:1) and white on the darkest (7.5:1). Empty days get an outline.

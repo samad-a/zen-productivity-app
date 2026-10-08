@@ -1,13 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288">
     <group
-        android:translateX="24.19"
-        android:translateY="32.00"
-        android:scaleX="0.22"
-        android:scaleY="0.22">
+        android:translateX="55.92"
+        android:translateY="79.00"
+        android:scaleX="0.65"
+        android:scaleY="0.65">
         <!-- Petals turn about the point where they meet at the bottom -->
         <group
             android:name="leftPetal"
