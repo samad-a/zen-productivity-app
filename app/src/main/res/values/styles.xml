@@ -30,6 +30,31 @@
         <item name="android:textSize">@dimen/text_body_large</item>
     </style>
 
+    <!-- Transparent 48dp icon button, e.g. previous/next month -->
+    <style name="Widget.Zen.NavIconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">@color/dark_green</item>
+        <item name="android:minWidth">@dimen/touch_target</item>
+        <item name="android:minHeight">@dimen/touch_target</item>
+    </style>
+
+    <style name="Widget.Zen.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/light_green</item>
+        <item name="cardCornerRadius">@dimen/corner_large</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Zen.StatLine" parent="">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_body_large</item>
+    </style>
+
+    <style name="Widget.Zen.StatSentence" parent="">
+        <item name="android:layout_marginTop">@dimen/spacing_large</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_heading</item>
+    </style>
+
     <style name="Widget.Zen.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:minHeight">@dimen/touch_target</item>
         <item name="android:textColor">@color/dark_green</item>

@@ -13,13 +13,27 @@
     <string name="task_description">Task Description</string>
     <string name="add_task">Add Task</string>
     <string name="calendar">calendar</string>
-    <string name="calendar_info">i</string>
-    <string name="calendar_info_description">What the calendar colours mean</string>
-    <string name="stats_insert_date">stats (insert date)</string>
-    <string name="tasks_finished">tasks finished</string>
     <string name="hours_focused">hours focused</string>
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+    <string name="legend_none">None</string>
+    <string name="legend_one">1</string>
+    <string name="legend_some">2–3</string>
+    <string name="legend_many">4+</string>
+    <string name="legend_description">Shading shows study sessions per day: none, 1, 2 to 3, or 4 or more</string>
+    <plurals name="study_sessions">
+        <item quantity="one">%d study session</item>
+        <item quantity="other">%d study sessions</item>
+    </plurals>
+    <plurals name="tasks_finished">
+        <item quantity="one">%d task finished</item>
+        <item quantity="other">%d tasks finished</item>
+    </plurals>
+    <string name="focused_duration">%1$s focused</string>
+    <string name="duration_hours_minutes">%1$d h %2$d min</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="calendar_day_description">%1$s, %2$s</string>
     <string name="pomodoro">pomodoro</string>
-    <string name="keep_your_streak">keep your streak!</string>
     <string name="start">Start</string>
     <string name="minutes">minutes</string>
     <string name="study_label">study</string>
@@ -36,10 +50,35 @@
     <string name="backup_status">Your tasks and timer settings are saved on this device and backed up to your Google account by Android Backup when backup is on in your phone settings. Nothing is sent anywhere else.</string>
     <string name="stats">stats</string>
     <string name="tasks_completed">tasks completed</string>
-    <string name="days_longest_streak">days longest streak</string>
-    <string name="days_since_joining">days since joining</string>
-    <string name="monday_is_the_day_youre">Monday is the day you\'re most productive!</string>
-    <string name="youve_created_0_unique_tasks">You\'ve created 0 unique tasks!</string>
+    <string name="your_year">Your year</string>
+    <plurals name="longest_streak_label">
+        <item quantity="one">day longest streak</item>
+        <item quantity="other">days longest streak</item>
+    </plurals>
+    <plurals name="days_since_joining_label">
+        <item quantity="one">day since joining</item>
+        <item quantity="other">days since joining</item>
+    </plurals>
+    <string name="most_productive_day">%1$s is the day you\'re most productive!</string>
+    <string name="most_productive_day_unknown">Finish a study session to find your most productive day.</string>
+    <plurals name="unique_tasks">
+        <item quantity="one">You\'ve created %d unique task!</item>
+        <item quantity="other">You\'ve created %d unique tasks!</item>
+    </plurals>
+    <plurals name="year_heatmap_description">
+        <item quantity="one">Study sessions over the last year: %d study day</item>
+        <item quantity="other">Study sessions over the last year: %d study days</item>
+    </plurals>
+    <string name="stat_description">%1$s %2$s</string>
+    <string name="streak_none">Study today to start a streak!</string>
+    <plurals name="streak_kept">
+        <item quantity="one">%d day streak</item>
+        <item quantity="other">%d day streak</item>
+    </plurals>
+    <plurals name="streak_at_risk">
+        <item quantity="one">%d day streak: study today to keep it!</item>
+        <item quantity="other">%d day streak: study today to keep it!</item>
+    </plurals>
     <string name="my_tasks">my tasks</string>
     <string name="task_list">Task list</string>
     <string name="add_new_task">+ Add new task</string>

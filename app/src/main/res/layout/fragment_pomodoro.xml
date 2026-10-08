@@ -32,12 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
             android:gravity="center_horizontal"
-            android:text="@string/keep_your_streak"
             android:textColor="@color/text_secondary"
             android:textSize="@dimen/text_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pomodoroTitleText" />
+            app:layout_constraintTop_toBottomOf="@id/pomodoroTitleText"
+            tools:text="3 day streak" />
 
         <ImageView
             android:id="@+id/streakImage"

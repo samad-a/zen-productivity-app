@@ -12,14 +12,18 @@ import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
+import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dev.samadali.zen.R
 import dev.samadali.zen.databinding.FragmentPomodoroBinding
+import dev.samadali.zen.stats.ActivityViewModel
 
 class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
     private val viewModel: PomodoroViewModel by viewModels()
+    private val activityViewModel: ActivityViewModel by activityViewModels()
     private var binding: FragmentPomodoroBinding? = null
 
     // The timer still runs if notifications are denied, it just can't alert the user.
@@ -60,6 +64,19 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
         PomodoroTimer.phase.observe(viewLifecycleOwner) { updatePhaseText() }
         PomodoroTimer.completedInCycle.observe(viewLifecycleOwner) { updatePhaseText() }
         viewModel.sessionsToday.observe(viewLifecycleOwner) { updateTodayText() }
+        activityViewModel.summary.observe(viewLifecycleOwner) { summary ->
+            val streak = summary.currentStreak
+            binding.streakText.text = when {
+                streak == 0 -> getString(R.string.streak_none)
+                summary.studiedToday -> resources.getQuantityString(R.plurals.streak_kept, streak, streak)
+                else -> resources.getQuantityString(R.plurals.streak_at_risk, streak, streak)
+            }
+            // The petals turn green once today's session keeps the streak going
+            ImageViewCompat.setImageTintList(
+                binding.streakImage,
+                if (summary.studiedToday) ContextCompat.getColorStateList(requireContext(), R.color.dark_green) else null
+            )
+        }
 
         bindDurationInput(binding.studyTextInput, PomodoroTimer.studyMinutes, PomodoroTimer::setStudyMinutes)
         bindDurationInput(binding.breakTextInput, PomodoroTimer.breakMinutes, PomodoroTimer::setBreakMinutes)
