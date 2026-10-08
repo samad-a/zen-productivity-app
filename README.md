@@ -10,8 +10,8 @@ calendar, stats and settings.
 | Pomodoro timer | Working. Runs in a foreground service, alerts when a phase ends, remembers durations |
 | Tasks | Working. Add, tick off, swipe to delete (with undo); stored in a Room database |
 | Calendar, Stats | Designs only, not wired to data yet |
-| Settings | Design only, apart from log out |
-| Login / sign up | Placeholder. Log in goes straight into the app without authenticating |
+| Settings | Design only, apart from the backup note |
+| Accounts | None by design: the app is local-first and opens straight into the timer |
 
 ## Building
 
@@ -41,7 +41,6 @@ Note: the instrumented tests reset the app's saved pomodoro durations on the dev
 app/src/main/java/dev/samadali/zen/
 ├── ZenApp.kt              Application: creates the database, initialises the timer
 ├── MainActivity.kt        Bottom navigation host for the main tabs
-├── auth/                  Landing, login and sign up screens
 ├── pomodoro/              Timer state (PomodoroTimer), foreground service, UI
 ├── tasks/                 Task list, add task screen, adapter, ViewModel
 ├── data/                  Room entities, DAOs and database
@@ -57,3 +56,15 @@ app/src/main/java/dev/samadali/zen/
 - Dependency versions live in `gradle/libs.versions.toml`.
 
 The app uses a light-only theme: layouts use fixed light backgrounds and dark green text.
+
+## Data and backup
+
+All data stays on the device: tasks in a Room database and timer settings in SharedPreferences. There are no
+accounts and no server. Android Auto Backup (`allowBackup`, with the default rules) copies this data to the
+user's own Google account when backup is on, and restores it on reinstall or a new phone, at no cost.
+
+## Accessibility
+
+Colours are chosen to meet WCAG 2.1 AA contrast; the ratios are noted in `res/values/colors.xml`. `green` and
+`light_green` are for fills only, never for text or icons on white. Buttons, switches and titles get their
+sizes and colours from the styles in `res/values/styles.xml`, and touch targets are at least 48dp.

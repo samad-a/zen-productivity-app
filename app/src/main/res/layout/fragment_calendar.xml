@@ -41,6 +41,7 @@
             android:backgroundTint="@color/white"
             android:fontFamily="serif"
             android:text="@string/calendar_info"
+            android:contentDescription="@string/calendar_info_description"
             android:textColor="@color/dark_green"
             android:textSize="24sp"
             android:textStyle="bold"

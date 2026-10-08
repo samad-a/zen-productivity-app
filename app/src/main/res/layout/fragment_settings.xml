@@ -1,206 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.SettingsFragment" >
+    tools:context=".settings.SettingsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingBottom="@dimen/spacing_large">
 
         <TextView
             android:id="@+id/settingsTitle"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Zen.Title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/settings"
-            android:textColor="@color/dark_green"
-            android:textSize="60sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="@dimen/title_margin_top"
+            android:gravity="center_horizontal"
+            android:text="@string/settings" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settingsTitle">
+        <TextView
+            style="@style/Widget.Zen.SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/settings_notifications" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/usernameTextInputLayout"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/notificationsSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_notifications" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usernameTextInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/username"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/taskRemindersSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_reminders" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordTextInputLayout"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:passwordToggleEnabled="false">
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/streakRemindersSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/streak_reminders" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordTextInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/studyMotivationSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/study_motivation" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+        <TextView
+            style="@style/Widget.Zen.SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/settings_appearance" />
 
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:paddingStart="65dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="50dp"
-                    android:paddingBottom="10dp"
-                    android:scaleX="1.6"
-                    android:scaleY="1.6"
-                    android:text="@string/enable_notifications"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20sp"
-                    android:trackTint="@color/switch_track"
-                    android:thumbTint="@color/switch_thumb"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/themeButton"
+            style="@style/Widget.Zen.Button.Tonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@string/customise_app_theme" />
 
-                <Switch
-                    android:id="@+id/switch3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:scaleX="1.2"
-                    android:scaleY="1.2"
-                    android:text="@string/task_reminders"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20sp"
-                    android:trackTint="@color/switch_track"
-                    android:thumbTint="@color/switch_thumb"
-                    app:layout_constraintStart_toStartOf="@+id/switch1"
-                    app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        <TextView
+            style="@style/Widget.Zen.SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/settings_data" />
 
-                <Switch
-                    android:id="@+id/switch4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:scaleX="1.2"
-                    android:scaleY="1.2"
-                    android:text="@string/study_motivation"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20sp"
-                    android:trackTint="@color/switch_track"
-                    android:thumbTint="@color/switch_thumb"
-                    app:layout_constraintStart_toStartOf="@+id/switch5"
-                    app:layout_constraintTop_toBottomOf="@+id/switch5" />
-
-                <Switch
-                    android:id="@+id/switch5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:scaleX="1.2"
-                    android:scaleY="1.2"
-                    android:text="@string/streak_reminders"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20sp"
-                    android:trackTint="@color/switch_track"
-                    android:thumbTint="@color/switch_thumb"
-                    app:layout_constraintStart_toStartOf="@+id/switch3"
-                    app:layout_constraintTop_toBottomOf="@+id/switch3" />
-
-                <Switch
-                    android:id="@+id/switch6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:paddingStart="45dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="35dp"
-                    android:paddingBottom="10dp"
-                    android:scaleX="1.6"
-                    android:scaleY="1.6"
-                    android:text="@string/focus_mode"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20sp"
-                    android:trackTint="@color/switch_track"
-                    android:thumbTint="@color/switch_thumb"
-                    app:layout_constraintStart_toStartOf="@+id/switch4"
-                    app:layout_constraintTop_toBottomOf="@+id/switch4" />
-
-                <Button
-                    android:id="@+id/themeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:text="@string/customise_app_theme"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/switch6" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/logoutButton"
-                    android:layout_width="200dp"
-                    android:layout_height="80dp"
-                    android:text="@string/log_out"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        <TextView
+            android:id="@+id/backupStatusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@string/backup_status"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:text="@string/keep_your_streak"
-                    android:textColor="#898989"
+                    android:textColor="@color/text_secondary"
                     app:layout_constraintBottom_toTopOf="@+id/streakImage"
                     app:layout_constraintEnd_toEndOf="@+id/streakImage"
                     app:layout_constraintStart_toStartOf="@+id/streakImage"
@@ -82,6 +82,7 @@
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/progressBar"
+                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:max="100"
@@ -110,7 +111,6 @@
                     android:layout_height="75dp"
                     android:layout_weight="0"
                     android:text="@string/start"
-                    android:textColor="@color/white"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

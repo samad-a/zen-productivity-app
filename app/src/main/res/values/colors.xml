@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    Contrast ratios (WCAG 2.1 AA needs 4.5:1 for body text, 3:1 for large text and icons):
+    dark_green on white 7.5:1, on light_green 6.3:1, on green 4.2:1 (large/bold text only).
+    green and light_green are fills only; never use them for text or icons on white.
+    -->
     <color name="dark_green">#FF2D601C</color>
     <color name="green">#FF9ED08E</color>
     <color name="light_green">#FFDCF2D5</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- 5.0:1 on light_green: unselected navigation items -->
+    <color name="muted_green">#FF4E6B45</color>
+    <!-- 6.5:1 on white: secondary text -->
+    <color name="text_secondary">#FF5E5E5E</color>
+    <!-- 4.5:1 on white: outlines of unchecked switches and text fields -->
+    <color name="outline">#FF767676</color>
 </resources>
