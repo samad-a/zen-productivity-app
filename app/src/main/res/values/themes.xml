@@ -1,9 +1,9 @@
 <resources>
     <!--
-    The app is designed as a light-only theme: layouts use fixed light backgrounds and
-    dark green text, so a DayNight parent would give light text on white in dark mode.
+    Light and dark both come from the colour tokens in colors.xml, which values-night
+    redefines. The user can follow the system or pick one in Settings.
     -->
-    <style name="Base.Theme.Zen" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.Zen" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary is dark green so focus outlines, cursors and switches meet 3:1 on white -->
         <item name="colorPrimary">@color/dark_green</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -16,7 +16,7 @@
         <item name="colorOnSurfaceVariant">@color/text_secondary</item>
         <item name="colorOutline">@color/outline</item>
         <!-- Unchecked switch track; the default is lavender -->
-        <item name="colorSurfaceContainerHighest">#FFEFEFEF</item>
+        <item name="colorSurfaceContainerHighest">@color/switch_track_off</item>
         <!-- Bottom sheets and dialogs; the defaults are tinted lavender -->
         <item name="colorSurfaceContainerLow">@color/white</item>
         <item name="colorSurfaceContainerHigh">@color/white</item>

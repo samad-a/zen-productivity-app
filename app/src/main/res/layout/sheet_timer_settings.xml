@@ -20,6 +20,40 @@
             android:text="@string/timer_settings" />
 
         <TextView
+            android:id="@+id/studyLengthLabel"
+            style="@style/Widget.Zen.SliderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Study length: 25 minutes" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/studyLengthSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/study_length"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="120"
+            app:tickVisible="false" />
+
+        <TextView
+            android:id="@+id/breakLengthLabel"
+            style="@style/Widget.Zen.SliderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Short break length: 5 minutes" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/breakLengthSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/break_length"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="60"
+            app:tickVisible="false" />
+
+        <TextView
             android:id="@+id/longBreakLabel"
             style="@style/Widget.Zen.SliderLabel"
             android:layout_width="match_parent"

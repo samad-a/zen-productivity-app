@@ -16,4 +16,7 @@ interface FocusSessionDao {
 
     @Query("SELECT * FROM focus_sessions ORDER BY completedAt")
     fun getAll(): LiveData<List<FocusSession>>
+
+    @Query("SELECT * FROM focus_sessions ORDER BY completedAt")
+    suspend fun getAllOnce(): List<FocusSession>
 }

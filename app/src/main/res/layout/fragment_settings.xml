@@ -30,18 +30,27 @@
                 android:gravity="center_horizontal"
                 android:text="@string/settings" />
 
+            <!-- Timer -->
             <TextView
-                style="@style/Widget.Zen.SectionHeading"
+                style="@style/Widget.Zen.SettingsHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/settings_timer" />
+
+            <include
+                android:id="@+id/timerRow"
+                layout="@layout/item_setting_row" />
+
+            <!-- Notifications -->
+            <TextView
+                style="@style/Widget.Zen.SettingsHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/settings_notifications" />
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/notificationsSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/enable_notifications" />
+            <include
+                android:id="@+id/notificationsRow"
+                layout="@layout/item_setting_row" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/taskRemindersSwitch"
@@ -61,26 +70,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/study_motivation" />
 
+            <!-- Appearance -->
             <TextView
-                style="@style/Widget.Zen.SectionHeading"
+                style="@style/Widget.Zen.SettingsHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/settings_appearance" />
 
-            <Button
-                android:id="@+id/themeButton"
-                style="@style/Widget.Zen.Button.Tonal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:text="@string/customise_app_theme" />
+            <include
+                android:id="@+id/themeRow"
+                layout="@layout/item_setting_row" />
 
+            <!-- Your data -->
             <TextView
-                style="@style/Widget.Zen.SectionHeading"
+                style="@style/Widget.Zen.SettingsHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/settings_data" />
 
             <TextView
@@ -91,6 +96,33 @@
                 android:text="@string/backup_status"
                 android:textColor="@color/text_secondary"
                 android:textSize="@dimen/text_body" />
+
+            <include
+                android:id="@+id/exportRow"
+                layout="@layout/item_setting_row" />
+
+            <include
+                android:id="@+id/deleteRow"
+                layout="@layout/item_setting_row" />
+
+            <!-- About -->
+            <TextView
+                style="@style/Widget.Zen.SettingsHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_about" />
+
+            <include
+                android:id="@+id/versionRow"
+                layout="@layout/item_setting_row" />
+
+            <include
+                android:id="@+id/privacyRow"
+                layout="@layout/item_setting_row" />
+
+            <include
+                android:id="@+id/licencesRow"
+                layout="@layout/item_setting_row" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,10 +1,12 @@
 package dev.samadali.zen
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import dev.samadali.zen.data.FocusSession
 import dev.samadali.zen.data.ZenDatabase
 import dev.samadali.zen.pomodoro.PomodoroTimer
+import dev.samadali.zen.settings.AppSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -31,6 +33,7 @@ class ZenApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppSettings(this).theme.nightMode)
         joinedAt
         PomodoroTimer.init(this)
         PomodoroTimer.onStudySessionCompleted = { startedAt, completedAt, duration ->
@@ -43,7 +46,7 @@ class ZenApp : Application() {
     }
 
     companion object {
-        private const val PREFS_NAME = "app"
+        private const val PREFS_NAME = AppSettings.PREFS_NAME
         private const val KEY_JOINED_AT = "joined_at"
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    Dark theme. Contrast: dark_green text on white (background) 13.5:1, on light_green
+    (cards, nav) 9.9:1, on green (buttons) 4.7:1; muted_green on light_green 6.2:1;
+    text_secondary on white 9.1:1; outline on white 5.8:1.
+    -->
+    <color name="dark_green">#FFC5EBB6</color>
+    <color name="green">#FF3F6B32</color>
+    <color name="light_green">#FF243520</color>
+    <color name="white">#FF121A10</color>
+
+    <color name="muted_green">#FF9DBB93</color>
+    <color name="text_secondary">#FFB3BCAF</color>
+    <color name="outline">#FF8C9688</color>
+    <color name="switch_track_off">#FF2C3829</color>
+
+    <!-- Day numbers stay at 4.8:1 or more on every shade -->
+    <color name="heat_2">#FF3A6A2E</color>
+</resources>

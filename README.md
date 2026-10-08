@@ -10,7 +10,7 @@ calendar, stats and settings.
 | Pomodoro timer | Working. Long breaks, daily goal, skip/reset, auto-start, alerts, notification actions; logs sessions |
 | Tasks | Working. Categories, due dates and reminders, edit, drag to reorder, collapsible finished section |
 | Calendar, Stats | Working. Session heatmaps, streaks and totals from the logged sessions |
-| Settings | Design only, apart from the backup note |
+| Settings | Working. Timer options, notifications, light/dark theme, export and delete data, about |
 | Accounts | None by design: the app is local-first and opens straight into the timer |
 
 ## Building
@@ -61,7 +61,8 @@ app/src/main/java/dev/samadali/zen/
   migration and commit the new schema file.
 - Dependency versions live in `gradle/libs.versions.toml`.
 
-The app uses a light-only theme: layouts use fixed light backgrounds and dark green text.
+Light and dark themes share the colour names in `res/values/colors.xml`; `res/values-night/colors.xml` swaps
+their values (so "white" is the dark background in the dark theme). Use those names rather than raw colours.
 
 ## Data and backup
 
@@ -73,4 +74,5 @@ user's own Google account when backup is on, and restores it on reinstall or a n
 
 Colours are chosen to meet WCAG 2.1 AA contrast; the ratios are noted in `res/values/colors.xml`. `green` and
 `light_green` are for fills only, never for text or icons on white. Buttons, switches and titles get their
-sizes and colours from the styles in `res/values/styles.xml`, and touch targets are at least 48dp.
+sizes and colours from the styles in `res/values/styles.xml`, and touch targets are at least 48dp. Both themes
+are checked; the dark palette's ratios are in `res/values-night/colors.xml`.
