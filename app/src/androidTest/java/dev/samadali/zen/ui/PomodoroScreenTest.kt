@@ -4,7 +4,9 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -48,6 +50,8 @@ class PomodoroScreenTest {
     fun showsTheStudyDurationBeforeStarting() {
         onView(withId(R.id.clockTimer)).check(matches(withText("25:00")))
         onView(withId(R.id.startStopButton)).check(matches(withText(R.string.start)))
+        onView(withId(R.id.phaseText)).check(matches(withText("Session 1 of 4")))
+        onView(withId(R.id.todayText)).check(matches(withText("0 of 8 sessions today")))
     }
 
     @Test
@@ -103,5 +107,74 @@ class PomodoroScreenTest {
         activity.scenario.recreate()
 
         onView(withId(R.id.clockTimer)).check(matches(withText("20:00")))
+    }
+
+    @Test
+    fun completingAStudySessionCountsTowardsToday() {
+        onView(withId(R.id.startStopButton)).perform(click())
+
+        now += 25 * 60_000
+
+        eventually { onView(withId(R.id.todayText)).check(matches(withText("1 of 8 sessions today"))) }
+        onView(withId(R.id.phaseText)).check(matches(withText(R.string.short_break)))
+    }
+
+    @Test
+    fun theFourthStudySessionIsFollowedByALongBreak() {
+        onView(withId(R.id.startStopButton)).perform(click())
+
+        // Four study sessions with three short breaks between them
+        now += (4 * 25 + 3 * 5) * 60_000L
+
+        eventually { onView(withId(R.id.phaseText)).check(matches(withText(R.string.long_break))) }
+        onView(withId(R.id.clockTimer)).check(matches(withText("15:00")))
+        eventually { onView(withId(R.id.todayText)).check(matches(withText("4 of 8 sessions today"))) }
+
+        now += 15 * 60_000
+        eventually { onView(withId(R.id.phaseText)).check(matches(withText("Session 1 of 4"))) }
+    }
+
+    @Test
+    fun withAutoStartOffTheBreakWaitsForTheUser() {
+        onMain { PomodoroTimer.settings.autoStartBreaks = false }
+        onView(withId(R.id.startStopButton)).perform(click())
+
+        now += 25 * 60_000
+
+        eventually { onView(withId(R.id.startStopButton)).check(matches(withText(R.string.start))) }
+        onView(withId(R.id.clockTimer)).check(matches(withText("05:00")))
+        onView(withId(R.id.phaseText)).check(matches(withText(R.string.short_break)))
+    }
+
+    @Test
+    fun resetPutsThePhaseBackToTheStart() {
+        onView(withId(R.id.startStopButton)).perform(click())
+        now += 5 * 60_000
+        eventually { onView(withId(R.id.clockTimer)).check(matches(withText("20:00"))) }
+
+        onView(withId(R.id.resetButton)).perform(click())
+
+        onView(withId(R.id.clockTimer)).check(matches(withText("25:00")))
+        onView(withId(R.id.startStopButton)).check(matches(withText(R.string.start)))
+    }
+
+    @Test
+    fun skipMovesToTheNextPhaseWithoutCountingTheSession() {
+        onView(withId(R.id.skipButton)).perform(click())
+
+        onView(withId(R.id.phaseText)).check(matches(withText(R.string.short_break)))
+        onView(withId(R.id.clockTimer)).check(matches(withText("05:00")))
+
+        onView(withId(R.id.skipButton)).perform(click())
+
+        onView(withId(R.id.phaseText)).check(matches(withText("Session 1 of 4")))
+        onView(withId(R.id.todayText)).check(matches(withText("0 of 8 sessions today")))
+    }
+
+    @Test
+    fun timerSettingsSheetOpens() {
+        onView(withId(R.id.timerSettingsButton)).perform(scrollTo(), click())
+
+        onView(withId(R.id.longBreakSlider)).check(matches(isDisplayed()))
     }
 }

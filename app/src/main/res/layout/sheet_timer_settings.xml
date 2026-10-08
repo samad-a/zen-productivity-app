@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingBottom="@dimen/spacing_large">
+
+        <TextView
+            style="@style/Widget.Zen.SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:text="@string/timer_settings" />
+
+        <TextView
+            android:id="@+id/longBreakLabel"
+            style="@style/Widget.Zen.SliderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Long break length: 15 minutes" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/longBreakSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/long_break_length"
+            android:stepSize="5"
+            app:tickVisible="false"
+            android:valueFrom="5"
+            android:valueTo="60" />
+
+        <TextView
+            android:id="@+id/sessionsLabel"
+            style="@style/Widget.Zen.SliderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Study sessions before a long break: 4" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sessionsSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/sessions_before_long_break"
+            android:stepSize="1"
+            app:tickVisible="false"
+            android:valueFrom="2"
+            android:valueTo="8" />
+
+        <TextView
+            android:id="@+id/dailyGoalLabel"
+            style="@style/Widget.Zen.SliderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Daily goal: 8 sessions" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/dailyGoalSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/daily_goal"
+            android:stepSize="1"
+            app:tickVisible="false"
+            android:valueFrom="1"
+            android:valueTo="16" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/autoStartBreaksSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/auto_start_breaks" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/autoStartStudySwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/auto_start_study" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/soundSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alert_sound" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/vibrateSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alert_vibrate" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/keepScreenOnSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/keep_screen_on" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

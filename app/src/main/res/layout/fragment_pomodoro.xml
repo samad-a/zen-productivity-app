@@ -77,33 +77,87 @@
                 tools:indicatorSize="300dp"
                 tools:progress="65" />
 
-            <TextView
-                android:id="@+id/clockTimer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingHorizontal="48dp"
-                android:textColor="@color/dark_green"
-                android:textSize="@dimen/text_timer"
-                app:autoSizeMaxTextSize="@dimen/text_timer"
-                app:autoSizeMinTextSize="24sp"
-                app:autoSizeTextType="uniform"
-                tools:text="25:00" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="48dp">
+
+                <TextView
+                    android:id="@+id/clockTimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/text_timer"
+                    app:autoSizeMaxTextSize="@dimen/text_timer"
+                    app:autoSizeMinTextSize="24sp"
+                    app:autoSizeTextType="uniform"
+                    tools:text="25:00" />
+
+                <!-- "Session 2 of 4", "Short break" or "Long break" -->
+                <TextView
+                    android:id="@+id/phaseText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/text_body"
+                    tools:text="Session 2 of 4" />
+            </LinearLayout>
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/todayText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timerFrame"
+            tools:text="3 of 8 sessions today" />
+
+        <Button
+            android:id="@+id/resetButton"
+            style="@style/Widget.Zen.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:contentDescription="@string/reset_timer"
+            app:icon="@drawable/ic_replay"
+            app:layout_constraintBottom_toBottomOf="@id/startStopButton"
+            app:layout_constraintEnd_toStartOf="@id/startStopButton"
+            app:layout_constraintTop_toTopOf="@id/startStopButton" />
 
         <Button
             android:id="@+id/startStopButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:text="@string/start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timerFrame"
-            app:layout_constraintWidth_max="@dimen/button_max_width"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintTop_toBottomOf="@id/todayText"
+            app:layout_constraintWidth_max="@dimen/start_button_max_width"
+            app:layout_constraintWidth_percent="0.45" />
+
+        <Button
+            android:id="@+id/skipButton"
+            style="@style/Widget.Zen.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:contentDescription="@string/skip_phase"
+            app:icon="@drawable/ic_skip_next"
+            app:layout_constraintBottom_toBottomOf="@id/startStopButton"
+            app:layout_constraintStart_toEndOf="@id/startStopButton"
+            app:layout_constraintTop_toTopOf="@id/startStopButton" />
 
         <!-- Durations: two equal columns, centred, no wider than the content max width -->
         <LinearLayout
@@ -113,11 +167,9 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:baselineAligned="false"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/startStopButton"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintWidth_max="@dimen/button_max_width">
 
             <LinearLayout
@@ -184,5 +236,23 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/timerSettingsButton"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:minHeight="@dimen/touch_target"
+            android:text="@string/more_timer_settings"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text_body"
+            app:icon="@drawable/ic_tune"
+            app:iconTint="@color/dark_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/durationsRow"
+            app:layout_constraintVertical_bias="0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

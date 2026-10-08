@@ -15,6 +15,21 @@
         <item name="backgroundTint">@color/light_green</item>
     </style>
 
+    <!-- Round 64dp icon button beside the Start button, e.g. reset and skip -->
+    <style name="Widget.Zen.IconButton" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="backgroundTint">@color/light_green</item>
+        <item name="iconTint">@color/dark_green</item>
+        <item name="iconSize">28dp</item>
+        <item name="android:minWidth">@dimen/button_height</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+    </style>
+
+    <style name="Widget.Zen.SliderLabel" parent="">
+        <item name="android:layout_marginTop">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textSize">@dimen/text_body_large</item>
+    </style>
+
     <style name="Widget.Zen.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:minHeight">@dimen/touch_target</item>
         <item name="android:textColor">@color/dark_green</item>
