@@ -16,4 +16,13 @@
     <color name="text_secondary">#FF5E5E5E</color>
     <!-- 4.5:1 on white: outlines of unchecked switches and text fields -->
     <color name="outline">#FF767676</color>
+
+    <!--
+    Heatmap shades for 0, 1, 2-3 and 4+ sessions. Day numbers are dark_green on the first
+    three (6.3:1 and 4.7:1) and white on the darkest (7.5:1). Empty days get an outline.
+    -->
+    <color name="heat_0">@color/white</color>
+    <color name="heat_1">@color/light_green</color>
+    <color name="heat_2">#FFADD99E</color>
+    <color name="heat_3">@color/dark_green</color>
 </resources>
