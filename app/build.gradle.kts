@@ -55,5 +55,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.espresso.contrib)
+    androidTestImplementation(libs.androidx.espresso.accessibility)
+    androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.arch.core.testing)
 }

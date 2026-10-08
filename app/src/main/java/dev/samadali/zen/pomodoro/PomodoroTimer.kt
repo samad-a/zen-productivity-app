@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
@@ -26,6 +27,10 @@ object PomodoroTimer {
     private const val KEY_BREAK_MINUTES = "break_minutes"
     private const val KEY_PHASE = "phase"
     private const val KEY_REMAINING = "remaining"
+
+    /** Monotonic time in milliseconds. Tests replace it to skip through phases instantly. */
+    @VisibleForTesting
+    var clock: () -> Long = SystemClock::elapsedRealtime
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var prefs: SharedPreferences
@@ -79,7 +84,7 @@ object PomodoroTimer {
 
     fun start(context: Context) {
         if (_isRunning.value == true) return
-        endAtElapsed = SystemClock.elapsedRealtime() + (_remainingMillis.value ?: 0L)
+        endAtElapsed = clock() + (_remainingMillis.value ?: 0L)
         _isRunning.value = true
         handler.post(tick)
         ContextCompat.startForegroundService(context, Intent(context, PomodoroService::class.java))
@@ -113,14 +118,14 @@ object PomodoroTimer {
     fun phaseEndsAtWallClock(): Long = System.currentTimeMillis() + remainingNow()
 
     fun remainingNow(): Long =
-        if (_isRunning.value == true) maxOf(0L, endAtElapsed - SystemClock.elapsedRealtime())
+        if (_isRunning.value == true) maxOf(0L, endAtElapsed - clock())
         else _remainingMillis.value ?: 0L
 
     private fun finishPhase() {
         val finished = _phase.value ?: Phase.STUDY
         val next = if (finished == Phase.STUDY) Phase.BREAK else Phase.STUDY
         val duration = durationOf(next)
-        endAtElapsed = SystemClock.elapsedRealtime() + duration
+        endAtElapsed = clock() + duration
         _phase.value = next
         _totalMillis.value = duration
         _remainingMillis.value = duration
