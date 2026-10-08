@@ -93,13 +93,17 @@ object PomodoroTimer {
         saveProgress()
     }
 
+    // Unchanged values are ignored: the duration fields re-send their text when the
+    // screen is recreated, which would otherwise reset a paused phase.
     fun setStudyMinutes(minutes: Long) {
+        if (minutes == studyMinutes) return
         studyMinutes = minutes
         prefs.edit { putLong(KEY_STUDY_MINUTES, minutes) }
         if (_phase.value == Phase.STUDY && _isRunning.value != true) resetPhase()
     }
 
     fun setBreakMinutes(minutes: Long) {
+        if (minutes == breakMinutes) return
         breakMinutes = minutes
         prefs.edit { putLong(KEY_BREAK_MINUTES, minutes) }
         if (_phase.value == Phase.BREAK && _isRunning.value != true) resetPhase()
