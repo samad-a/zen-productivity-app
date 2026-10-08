@@ -33,7 +33,12 @@ Requirements: Android Studio (or JDK 17+) and the Android SDK with API 37.
 CI (`.github/workflows/ci.yml`) runs lint, unit tests and a debug build, and the instrumented tests on an API 35
 emulator, on every push to `main` and on pull requests.
 
-Note: the instrumented tests reset the app's saved pomodoro durations on the device they run on.
+The instrumented tests include Espresso screen tests (`androidTest/.../ui/`) for navigation, the task list and
+the timer. The timer tests swap `PomodoroTimer.clock` for a fake clock, so finishing a 25 minute phase takes no
+time. Every Espresso action also runs the Accessibility Test Framework checks (labels, touch targets, contrast).
+Turn off animations on the test device (Developer options) to keep the tests stable.
+
+Note: the instrumented tests clear the app's tasks and timer settings on the device they run on.
 
 ## Project structure
 

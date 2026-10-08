@@ -40,6 +40,7 @@
     <string name="monday_is_the_day_youre">Monday is the day you\'re most productive!</string>
     <string name="youve_created_0_unique_tasks">You\'ve created 0 unique tasks!</string>
     <string name="my_tasks">my tasks</string>
+    <string name="task_list">Task list</string>
     <string name="add_new_task">+ Add new task</string>
     <string name="nav_tasks">Tasks</string>
     <string name="nav_calendar">Calendar</string>
