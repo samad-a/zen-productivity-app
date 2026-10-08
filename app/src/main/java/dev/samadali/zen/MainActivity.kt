@@ -1,5 +1,6 @@
 package dev.samadali.zen
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dev.samadali.zen.calendar.CalendarFragment
 import dev.samadali.zen.databinding.ActivityMainBinding
 import dev.samadali.zen.pomodoro.PomodoroFragment
@@ -16,6 +18,8 @@ import dev.samadali.zen.stats.StatsFragment
 import dev.samadali.zen.tasks.TasksFragment
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var bottomNavigation: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -40,11 +44,6 @@ class MainActivity : AppCompatActivity() {
         }
         bottomNavigation.setItemActiveIndicatorEnabled(false)
 
-        if (savedInstanceState == null) {
-            bottomNavigation.selectedItemId = R.id.pomodoro
-            showTab(PomodoroFragment())
-        }
-
         bottomNavigation.setOnItemSelectedListener { item ->
             val fragment = when (item.itemId) {
                 R.id.tasks -> TasksFragment()
@@ -56,13 +55,30 @@ class MainActivity : AppCompatActivity() {
             showTab(fragment)
             true
         }
+
+        if (savedInstanceState == null) {
+            bottomNavigation.selectedItemId = intent.getIntExtra(EXTRA_TAB, R.id.pomodoro)
+        }
+        this.bottomNavigation = bottomNavigation
+    }
+
+    // Opened from a notification while already running, e.g. a task reminder
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val tab = intent.getIntExtra(EXTRA_TAB, 0)
+        if (tab != 0) bottomNavigation.selectedItemId = tab
     }
 
     private fun showTab(fragment: Fragment) {
-        // Drop sub-screens such as AddTaskFragment so back doesn't return to a different tab
+        // Drop sub-screens such as TaskEditorFragment so back doesn't return to a different tab
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.beginTransaction()
             .replace(R.id.flFragment, fragment)
             .commit()
+    }
+
+    companion object {
+        /** Menu id of the tab to open, e.g. R.id.tasks. */
+        const val EXTRA_TAB = "dev.samadali.zen.extra.TAB"
     }
 }
