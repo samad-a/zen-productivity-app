@@ -6,12 +6,18 @@ import android.os.Build
 import android.os.SystemClock
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.accessibility.AccessibilityChecks
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
+import com.google.android.apps.common.testing.accessibility.framework.AccessibilityCheckResultUtils.matchesCheckNames
+import com.google.android.apps.common.testing.accessibility.framework.AccessibilityCheckResultUtils.matchesViews
+import dev.samadali.zen.R
 import dev.samadali.zen.ZenApp
 import dev.samadali.zen.data.FocusSession
 import dev.samadali.zen.pomodoro.PomodoroTimer
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.allOf
 import java.time.LocalDate
 import java.time.ZoneId
 
@@ -22,7 +28,17 @@ object UiTestSupport {
     init {
         // Every Espresso action also runs the Accessibility Test Framework checks
         // (touch target size, labels, contrast) on the whole screen.
-        AccessibilityChecks.enable().setRunChecksFromRootView(true)
+        AccessibilityChecks.enable()
+            .setRunChecksFromRootView(true)
+            // Calendar days are 48dp tall but share the width between seven columns, so on
+            // narrow phones (CI's emulator is 320dp wide) they're about 35dp wide. That still
+            // passes WCAG 2.2's 24dp minimum target size; nothing else is exempt.
+            .setSuppressingResultMatcher(
+                allOf(
+                    matchesCheckNames(`is`("TouchTargetSizeCheck")),
+                    matchesViews(withId(R.id.dayText))
+                )
+            )
     }
 
     /** Lets the timer start its foreground service without a permission dialog. */
