@@ -33,6 +33,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        // MigrationTestHelper reads the exported schemas from the test APK's assets
+        getByName("androidTest").assets.directories.add("$projectDir/schemas")
+    }
 }
 
 ksp {
@@ -52,6 +56,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+    constraints {
+        // Lifecycle brings in 1.7.3, and test APKs are held to the app's versions, but
+        // room-testing's schema reader needs 1.8.1 or newer
+        implementation(libs.kotlinx.serialization.core)
+    }
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,4 +68,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.accessibility)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.arch.core.testing)
+    androidTestImplementation(libs.androidx.room.testing)
 }
