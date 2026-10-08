@@ -83,6 +83,36 @@ class TaskDaoTest {
         assertEquals(id, task.id)
     }
 
+    @Test
+    fun getAll_ordersUnfinishedByPositionAndFinishedByMostRecent() = runBlocking {
+        dao.insert(Task(name = "b", description = "", position = 1))
+        dao.insert(Task(name = "a", description = "", position = 0))
+        dao.insert(Task(name = "older done", description = "", isCompleted = true, completedAt = 10))
+        dao.insert(Task(name = "newer done", description = "", isCompleted = true, completedAt = 20))
+
+        val names = dao.getAll().awaitValue().map { it.name }
+        assertEquals(listOf("a", "b", "newer done", "older done"), names)
+    }
+
+    @Test
+    fun nextPosition_isAfterTheLastUnfinishedTask() = runBlocking {
+        assertEquals(0, dao.nextPosition())
+        dao.insert(Task(name = "a", description = "", position = 4))
+        dao.insert(Task(name = "done", description = "", isCompleted = true, position = 9))
+
+        assertEquals(5, dao.nextPosition())
+    }
+
+    @Test
+    fun getUpcomingReminders_skipsPastAndFinishedTasks() = runBlocking {
+        dao.insert(Task(name = "soon", description = "", remindAt = 200))
+        dao.insert(Task(name = "past", description = "", remindAt = 50))
+        dao.insert(Task(name = "done", description = "", remindAt = 300, isCompleted = true))
+        dao.insert(Task(name = "none", description = ""))
+
+        assertEquals(listOf("soon"), dao.getUpcomingReminders(now = 100).map { it.name })
+    }
+
     /** Waits for the LiveData's next value; Room delivers query results asynchronously. */
     private fun <T> LiveData<T>.awaitValue(): T {
         var result: T? = null
