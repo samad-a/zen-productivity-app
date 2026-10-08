@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- Tapping the title expands or collapses the finished tasks -->
+    <TextView
+        android:id="@+id/completedToggle"
+        style="@style/Widget.Zen.SectionHeading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawablePadding="@dimen/spacing_small"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/touch_target"
+        app:drawableStartCompat="@drawable/ic_expand_more"
+        tools:text="Completed (3)" />
+
+    <Button
+        android:id="@+id/clearCompletedButton"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/touch_target"
+        android:text="@string/clear_completed"
+        android:textColor="@color/dark_green"
+        android:textSize="@dimen/text_body" />
+</LinearLayout>

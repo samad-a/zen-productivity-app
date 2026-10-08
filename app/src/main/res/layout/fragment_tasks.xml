@@ -34,6 +34,22 @@
         app:layout_constraintTop_toBottomOf="@id/tasksTitle"
         app:layout_constraintWidth_max="@dimen/content_max_width" />
 
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        android:gravity="center"
+        android:text="@string/no_tasks_yet"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/text_body_large"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tasksRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tasksRecyclerView"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/addNewTaskButton"
         style="@style/Widget.Zen.Button.Tonal"
