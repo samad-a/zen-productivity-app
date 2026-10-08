@@ -7,9 +7,9 @@ calendar, stats and settings.
 
 | Feature | State |
 | --- | --- |
-| Pomodoro timer | Working. Runs in a foreground service, alerts when a phase ends, remembers durations |
-| Tasks | Working. Add, tick off, swipe to delete (with undo); stored in a Room database |
-| Calendar, Stats | Designs only, not wired to data yet |
+| Pomodoro timer | Working. Long breaks, daily goal, skip/reset, auto-start, alerts, notification actions; logs sessions |
+| Tasks | Working. Categories, due dates and reminders, edit, drag to reorder, collapsible finished section |
+| Calendar, Stats | Working. Session heatmaps, streaks and totals from the logged sessions |
 | Settings | Design only, apart from the backup note |
 | Accounts | None by design: the app is local-first and opens straight into the timer |
 
@@ -47,9 +47,10 @@ app/src/main/java/dev/samadali/zen/
 ├── ZenApp.kt              Application: creates the database, initialises the timer
 ├── MainActivity.kt        Bottom navigation host for the main tabs
 ├── pomodoro/              Timer state (PomodoroTimer), foreground service, UI
-├── tasks/                 Task list, add task screen, adapter, ViewModel
+├── tasks/                 Task list, editor, adapter, ViewModel; reminders/ schedules notifications
 ├── data/                  Room entities, DAOs and database
-├── calendar/ stats/ settings/   Tab screens
+├── stats/                 Streak and stats calculations, stats screen, heatmap views
+├── calendar/ settings/    Tab screens
 ```
 
 - UI uses XML layouts with View Binding, one fragment per tab inside `MainActivity`.

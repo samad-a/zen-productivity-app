@@ -5,6 +5,7 @@ import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,6 +51,26 @@ class MigrationTest {
             }
         } finally {
             database.close()
+        }
+    }
+
+    @Test
+    fun migrate2To3_givesExistingTasksDefaults() {
+        helper.createDatabase(dbName, 2).use { db ->
+            db.execSQL(
+                "INSERT INTO tasks (id, name, description, isCompleted, createdAt, completedAt) " +
+                    "VALUES (1, 'Gym', '', 0, 100, NULL)"
+            )
+        }
+
+        helper.runMigrationsAndValidate(dbName, 3, true).use { db ->
+            db.query("SELECT category, dueAt, remindAt, position FROM tasks").use { cursor ->
+                cursor.moveToFirst()
+                assertEquals("OTHER", cursor.getString(0))
+                assertTrue(cursor.isNull(1))
+                assertTrue(cursor.isNull(2))
+                assertEquals(0, cursor.getInt(3))
+            }
         }
     }
 }
