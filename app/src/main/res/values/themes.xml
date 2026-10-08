@@ -26,4 +26,15 @@
     </style>
 
     <style name="Theme.Zen" parent="Base.Theme.Zen" />
+
+    <!--
+    Launch theme: the system splash screen shows the logo, then MainActivity switches to
+    Theme.Zen. Android 12+ animates the petals opening (values-v31); older versions show
+    the open logo.
+    -->
+    <style name="Theme.Zen.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Zen</item>
+    </style>
 </resources>

@@ -30,4 +30,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
 
+    <!--
+    Continues the launch animation after the system splash screen: the open logo in the same
+    place, then the "zen" title fades in and the whole overlay fades out. Removed afterwards.
+    It's clickable only to stop taps reaching the app underneath during that second.
+    -->
+    <FrameLayout
+        android:id="@+id/introOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="false"
+        android:importantForAccessibility="noHideDescendants"
+        android:visibility="gone"
+        tools:ignore="KeyboardInaccessibleWidget"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/introLogo"
+            android:layout_width="288dp"
+            android:layout_height="288dp"
+            android:layout_gravity="center"
+            android:src="@drawable/splash_logo"
+            tools:ignore="ContentDescription" />
+
+        <!-- Just below the logo, which is 130dp tall in the middle of its 288dp square -->
+        <ImageView
+            android:id="@+id/introTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="125dp"
+            android:alpha="0"
+            android:src="@drawable/zen_font"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

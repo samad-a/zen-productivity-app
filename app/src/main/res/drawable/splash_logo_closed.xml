@@ -1,0 +1,41 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288">
+    <group
+        android:translateX="55.92"
+        android:translateY="79.00"
+        android:scaleX="0.65"
+        android:scaleY="0.65">
+        <!-- Petals turn about the point where they meet at the bottom -->
+        <group
+            android:name="leftPetal"
+            android:pivotX="135.3"
+            android:pivotY="190"
+            android:rotation="45">
+            <path
+                android:fillColor="@color/logo_petal_left"
+                android:pathData="M114.94,79.71C153.99,118.76 169.66,166.41 149.94,186.13C130.22,205.85 82.58,190.18 43.52,151.13C4.47,112.08 -11.2,64.43 8.52,44.71C28.24,24.99 75.89,40.66 114.94,79.71Z" />
+        </group>
+        <group
+            android:name="rightPetal"
+            android:pivotX="135.3"
+            android:pivotY="190"
+            android:rotation="-45">
+            <path
+                android:fillColor="@color/logo_petal_right"
+                android:pathData="M155.52,79.71C116.47,118.76 100.8,166.41 120.52,186.13C140.24,205.85 187.89,190.18 226.94,151.13C265.99,112.08 281.67,64.43 261.94,44.71C242.22,24.99 194.58,40.66 155.52,79.71Z" />
+        </group>
+        <group
+            android:name="centrePetal"
+            android:pivotX="135.3"
+            android:pivotY="200"
+            android:scaleX="0.85"
+            android:scaleY="0.85">
+            <path
+                android:fillColor="@color/logo_petal_centre"
+                android:pathData="M185.81,100C185.81,155.23 163.2,200 135.31,200C107.42,200 84.81,155.23 84.81,100C84.81,44.77 107.42,0 135.31,0C163.2,0 185.81,44.77 185.81,100Z" />
+        </group>
+    </group>
+</vector>
