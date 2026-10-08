@@ -4,22 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="4dp"
-    android:minHeight="100dp"
+    android:minHeight="@dimen/task_min_height"
     app:cardBackgroundColor="@color/light_green"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="@dimen/corner_large"
     app:cardElevation="0dp"
     app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
-        android:padding="16dp">
+        android:minHeight="@dimen/task_min_height"
+        android:padding="@dimen/spacing_medium">
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/checkbox_size"
+            android:layout_height="@dimen/checkbox_size"
             android:button="@drawable/checkbox_custom"
             app:buttonTint="@null"
             app:useMaterialThemeColors="false"
@@ -31,8 +31,8 @@
             android:id="@+id/tvTaskName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="24sp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:textSize="@dimen/text_heading"
             android:textColor="@color/dark_green"
             app:layout_constraintStart_toEndOf="@id/checkBox"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +44,8 @@
             android:id="@+id/tvTaskDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="14sp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:textSize="@dimen/text_body"
             android:textColor="@color/dark_green"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@id/checkBox"

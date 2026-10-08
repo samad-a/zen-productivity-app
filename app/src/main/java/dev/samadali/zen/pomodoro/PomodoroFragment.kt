@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnLayout
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import dev.samadali.zen.R
@@ -24,6 +25,11 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentPomodoroBinding.bind(view)
+
+        // The ring's size is a dimension, not a layout size, so match it to the square frame
+        binding.timerFrame.doOnLayout { frame ->
+            binding.progressBar.indicatorSize = minOf(frame.width, frame.height)
+        }
 
         PomodoroTimer.remainingMillis.observe(viewLifecycleOwner) { remaining ->
             val total = PomodoroTimer.totalMillis.value ?: remaining

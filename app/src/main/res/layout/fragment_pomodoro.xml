@@ -1,217 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Scrolls only when the screen is too short, e.g. landscape or the largest font size -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".pomodoro.PomodoroFragment">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingBottom="@dimen/spacing_large">
 
         <TextView
             android:id="@+id/pomodoroTitleText"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Zen.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/title_margin_top"
+            android:gravity="center_horizontal"
             android:text="@string/pomodoro"
-            android:textColor="@color/dark_green"
-            android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/streakText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:gravity="center_horizontal"
+            android:text="@string/keep_your_streak"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pomodoroTitleText" />
+
+        <ImageView
+            android:id="@+id/streakImage"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/gray_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/streakText" />
+
+        <!-- Square that takes most of the width, but never more than timer_max_size -->
+        <FrameLayout
+            android:id="@+id/timerFrame"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/streakImage"
+            app:layout_constraintWidth_max="@dimen/timer_max_size"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:max="100"
+                app:indicatorColor="@color/dark_green"
+                app:trackColor="@color/light_green"
+                app:trackCornerRadius="10dp"
+                app:trackThickness="20dp"
+                tools:indicatorSize="300dp"
+                tools:progress="65" />
+
+            <TextView
+                android:id="@+id/clockTimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="48dp"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/text_timer"
+                app:autoSizeMaxTextSize="@dimen/text_timer"
+                app:autoSizeMinTextSize="24sp"
+                app:autoSizeTextType="uniform"
+                tools:text="25:00" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/startStopButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timerFrame"
+            app:layout_constraintWidth_max="@dimen/button_max_width"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <!-- Durations: two equal columns, centred, no wider than the content max width -->
+        <LinearLayout
+            android:id="@+id/durationsRow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pomodoroTitleText">
+            app:layout_constraintTop_toBottomOf="@id/startStopButton"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintWidth_max="@dimen/button_max_width">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="0.25">
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/streakText"
+                    android:id="@+id/studyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/keep_your_streak"
-                    android:textColor="@color/text_secondary"
-                    app:layout_constraintBottom_toTopOf="@+id/streakImage"
-                    app:layout_constraintEnd_toEndOf="@+id/streakImage"
-                    app:layout_constraintStart_toStartOf="@+id/streakImage"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/streakImage"
-                    android:importantForAccessibility="no"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/gray_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/clockTimer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="25:00"
+                    android:labelFor="@id/studyTextInput"
+                    android:text="@string/study_label"
                     android:textColor="@color/dark_green"
-                    android:textSize="60sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/progressBar"
-                    app:layout_constraintStart_toStartOf="@+id/progressBar"
-                    app:layout_constraintTop_toTopOf="@+id/progressBar" />
+                    android:textSize="@dimen/text_heading" />
 
-                <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/progressBar"
-                    android:importantForAccessibility="no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:max="100"
-                    android:progress="65"
-                    app:indicatorColor="@color/dark_green"
-                    app:indicatorSize="300dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:trackColor="@color/light_green"
-                    app:trackCornerRadius="10dp"
-                    app:trackThickness="20dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/studyMinutes"
+                    style="@style/Widget.Zen.DurationInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/studyTextInput"
+                        style="@style/Widget.Zen.DurationInput.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/minutes" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/startStopButton"
-                    android:layout_width="200dp"
-                    android:layout_height="75dp"
-                    android:layout_weight="0"
-                    android:text="@string/start"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_weight="1">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
+                <TextView
+                    android:id="@+id/breakText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:labelFor="@id/breakTextInput"
+                    android:text="@string/break_label"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/text_heading" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/studyMinutes"
-                        android:layout_width="80dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/breakMinutes"
+                    style="@style/Widget.Zen.DurationInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/breakTextInput"
+                        style="@style/Widget.Zen.DurationInput.EditText"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxCornerRadiusBottomEnd="15dp"
-                        app:boxCornerRadiusBottomStart="15dp"
-                        app:boxCornerRadiusTopEnd="15dp"
-                        app:boxCornerRadiusTopStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/studyTextInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:hint="@string/minutes"
-                            android:inputType="number"
-                            android:maxLength="3"
-                            android:textColor="@color/dark_green"
-                            android:textSize="24sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/studyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/study_label"
-                        android:textColor="@color/dark_green"
-                        android:textSize="34sp"
-                        app:layout_constraintBottom_toTopOf="@+id/studyMinutes"
-                        app:layout_constraintEnd_toEndOf="@+id/studyMinutes"
-                        app:layout_constraintStart_toStartOf="@+id/studyMinutes" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/breakMinutes"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        app:boxCornerRadiusBottomEnd="15dp"
-                        app:boxCornerRadiusBottomStart="15dp"
-                        app:boxCornerRadiusTopEnd="15dp"
-                        app:boxCornerRadiusTopStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/breakTextInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:hint="@string/minutes"
-                            android:inputType="number"
-                            android:maxLength="3"
-                            android:textColor="@color/dark_green"
-                            android:textSize="24sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/breakText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/break_label"
-                        android:textColor="@color/dark_green"
-                        android:textSize="34sp"
-                        app:layout_constraintBottom_toTopOf="@+id/breakMinutes"
-                        app:layout_constraintEnd_toEndOf="@+id/breakMinutes"
-                        app:layout_constraintStart_toStartOf="@+id/breakMinutes" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        android:hint="@string/minutes" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>

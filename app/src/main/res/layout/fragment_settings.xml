@@ -1,87 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings.SettingsFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
         android:paddingHorizontal="@dimen/screen_margin"
         android:paddingBottom="@dimen/spacing_large">
 
-        <TextView
-            android:id="@+id/settingsTitle"
-            style="@style/Widget.Zen.Title"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/title_margin_top"
-            android:gravity="center_horizontal"
-            android:text="@string/settings" />
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/content_max_width">
 
-        <TextView
-            style="@style/Widget.Zen.SectionHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:text="@string/settings_notifications" />
+            <TextView
+                android:id="@+id/settingsTitle"
+                style="@style/Widget.Zen.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_margin_top"
+                android:gravity="center_horizontal"
+                android:text="@string/settings" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/notificationsSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/enable_notifications" />
+            <TextView
+                style="@style/Widget.Zen.SectionHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/settings_notifications" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/taskRemindersSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/task_reminders" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/notificationsSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enable_notifications" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/streakRemindersSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/streak_reminders" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/taskRemindersSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/task_reminders" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/studyMotivationSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/study_motivation" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/streakRemindersSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/streak_reminders" />
 
-        <TextView
-            style="@style/Widget.Zen.SectionHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:text="@string/settings_appearance" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/studyMotivationSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/study_motivation" />
 
-        <Button
-            android:id="@+id/themeButton"
-            style="@style/Widget.Zen.Button.Tonal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/customise_app_theme" />
+            <TextView
+                style="@style/Widget.Zen.SectionHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/settings_appearance" />
 
-        <TextView
-            style="@style/Widget.Zen.SectionHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:text="@string/settings_data" />
+            <Button
+                android:id="@+id/themeButton"
+                style="@style/Widget.Zen.Button.Tonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/customise_app_theme" />
 
-        <TextView
-            android:id="@+id/backupStatusText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/backup_status"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_body" />
-    </LinearLayout>
+            <TextView
+                style="@style/Widget.Zen.SectionHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/settings_data" />
+
+            <TextView
+                android:id="@+id/backupStatusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/backup_status"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_body" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -9,16 +9,22 @@
 
     <!-- Content wider than this looks stretched on tablets and in landscape -->
     <dimen name="content_max_width">560dp</dimen>
+    <dimen name="button_max_width">360dp</dimen>
+    <!-- Timer and titles are smaller on short screens so the Start button stays visible; see values-h720dp -->
+    <dimen name="timer_max_size">200dp</dimen>
 
     <!-- Sizes -->
     <dimen name="touch_target">48dp</dimen>
     <dimen name="button_height">64dp</dimen>
+    <dimen name="task_min_height">80dp</dimen>
+    <dimen name="checkbox_size">48dp</dimen>
     <dimen name="corner_large">24dp</dimen>
     <dimen name="corner_medium">16dp</dimen>
 
     <!-- Text -->
-    <dimen name="text_title">56sp</dimen>
+    <dimen name="text_title">44sp</dimen>
     <dimen name="text_title_min">28sp</dimen>
+    <dimen name="text_timer">60sp</dimen>
     <dimen name="text_heading">22sp</dimen>
     <dimen name="text_button">22sp</dimen>
     <dimen name="text_body_large">18sp</dimen>
