@@ -17,6 +17,9 @@
         <item name="colorOutline">@color/outline</item>
         <!-- Unchecked switch track; the default is lavender -->
         <item name="colorSurfaceContainerHighest">#FFEFEFEF</item>
+        <!-- Bottom sheets and dialogs; the defaults are tinted lavender -->
+        <item name="colorSurfaceContainerLow">@color/white</item>
+        <item name="colorSurfaceContainerHigh">@color/white</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="materialButtonStyle">@style/Widget.Zen.Button</item>
         <item name="materialSwitchStyle">@style/Widget.Zen.Switch</item>
