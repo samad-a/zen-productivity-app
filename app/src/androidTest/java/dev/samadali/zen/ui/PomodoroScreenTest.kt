@@ -92,7 +92,7 @@ class PomodoroScreenTest {
 
     @Test
     fun changingTheStudyDurationUpdatesTheTimer() {
-        onView(withId(R.id.studyTextInput)).perform(replaceText("40"), closeSoftKeyboard())
+        onView(withId(R.id.studyTextInput)).perform(scrollTo(), replaceText("40"), closeSoftKeyboard())
 
         onView(withId(R.id.clockTimer)).check(matches(withText("40:00")))
     }
