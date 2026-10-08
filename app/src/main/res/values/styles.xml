@@ -55,6 +55,11 @@
         <item name="android:textSize">@dimen/text_heading</item>
     </style>
 
+    <style name="Widget.Zen.SettingsHeading" parent="Widget.Zen.SectionHeading">
+        <item name="android:layout_marginTop">@dimen/spacing_large</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
     <style name="Widget.Zen.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
         <item name="android:minHeight">@dimen/touch_target</item>
         <item name="android:textColor">@color/dark_green</item>

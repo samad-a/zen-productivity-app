@@ -11,6 +11,7 @@ import androidx.test.rule.GrantPermissionRule
 import dev.samadali.zen.ZenApp
 import dev.samadali.zen.data.FocusSession
 import dev.samadali.zen.pomodoro.PomodoroTimer
+import dev.samadali.zen.settings.AppSettings
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import java.time.ZoneId
@@ -40,6 +41,7 @@ object UiTestSupport {
             PomodoroTimer.pause()
             PomodoroTimer.clock = SystemClock::elapsedRealtime
             context.getSharedPreferences("pomodoro", Context.MODE_PRIVATE).edit().clear().commit()
+            AppSettings(context).theme = AppSettings.Theme.SYSTEM
             PomodoroTimer.init(context)
         }
     }

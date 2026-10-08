@@ -10,13 +10,14 @@ import androidx.core.app.NotificationManagerCompat
 import dev.samadali.zen.MainActivity
 import dev.samadali.zen.R
 import dev.samadali.zen.ZenApp
+import dev.samadali.zen.settings.AppSettings
 import kotlinx.coroutines.launch
 
 /** Posts a task's reminder when its alarm fires, unless the task was finished meanwhile. */
 class TaskReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val taskId = intent.getLongExtra(TaskReminders.EXTRA_TASK_ID, -1)
-        if (taskId < 0) return
+        if (taskId < 0 || !AppSettings(context).taskReminders) return
         val app = context.applicationContext as ZenApp
         val pending = goAsync()
         app.applicationScope.launch {

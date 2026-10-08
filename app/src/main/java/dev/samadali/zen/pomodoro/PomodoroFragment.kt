@@ -34,6 +34,10 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
 
     // The timer settings sheet changes the goal and cycle length while this screen is open
     private val settingsListener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
+        binding?.let {
+            syncDurationInput(it.studyTextInput, PomodoroTimer.studyMinutes)
+            syncDurationInput(it.breakTextInput, PomodoroTimer.breakMinutes)
+        }
         updatePhaseText()
         updateTodayText()
         updateKeepScreenOn()
@@ -147,6 +151,12 @@ class PomodoroFragment : Fragment(R.layout.fragment_pomodoro) {
             val minutes = text.toString().toLongOrNull() ?: 0L
             if (minutes > 0 && PomodoroTimer.isRunning.value != true) onChanged(minutes)
         }
+    }
+
+    /** Shows a duration changed in the settings sheet, without disturbing what's being typed. */
+    @SuppressLint("SetTextI18n")
+    private fun syncDurationInput(input: EditText, minutes: Long) {
+        if (input.text.toString().toLongOrNull() != minutes) input.setText(minutes.toString())
     }
 
     private fun needsNotificationPermission(): Boolean =

@@ -14,8 +14,8 @@ import dev.samadali.zen.R
 import dev.samadali.zen.databinding.SheetTimerSettingsBinding
 
 /**
- * The less frequently changed timer options. Study and break lengths stay on the
- * pomodoro screen itself, since they're changed most often.
+ * All the timer options. Opened from the timer screen and from Settings; the study and break
+ * boxes on the timer screen are a shortcut to the first two.
  */
 class TimerSettingsSheet : BottomSheetDialogFragment() {
 
@@ -26,6 +26,14 @@ class TimerSettingsSheet : BottomSheetDialogFragment() {
         val binding = SheetTimerSettingsBinding.bind(view)
         val settings = PomodoroTimer.settings
 
+        bindSlider(
+            binding.studyLengthSlider, binding.studyLengthLabel, R.string.study_length,
+            settings.studyMinutes.toInt(), R.plurals.minutes_value
+        ) { PomodoroTimer.setStudyMinutes(it.toLong()) }
+        bindSlider(
+            binding.breakLengthSlider, binding.breakLengthLabel, R.string.break_length,
+            settings.breakMinutes.toInt(), R.plurals.minutes_value
+        ) { PomodoroTimer.setBreakMinutes(it.toLong()) }
         bindSlider(
             binding.longBreakSlider, binding.longBreakLabel, R.string.long_break_length,
             settings.longBreakMinutes.toInt(), R.plurals.minutes_value

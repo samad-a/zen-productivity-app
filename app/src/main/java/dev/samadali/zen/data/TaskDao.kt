@@ -16,6 +16,9 @@ interface TaskDao {
     )
     fun getAll(): LiveData<List<Task>>
 
+    @Query("SELECT * FROM tasks ORDER BY createdAt")
+    suspend fun getAllOnce(): List<Task>
+
     @Query("SELECT * FROM tasks WHERE id = :id")
     suspend fun getById(id: Long): Task?
 
