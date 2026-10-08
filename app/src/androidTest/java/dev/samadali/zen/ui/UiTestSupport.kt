@@ -6,13 +6,20 @@ import android.os.Build
 import android.os.SystemClock
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.accessibility.AccessibilityChecks
-import androidx.test.espresso.matcher.ViewMatchers.withClassName
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
+import com.google.android.apps.common.testing.accessibility.framework.AccessibilityCheckResultUtils.matchesCheckNames
 import com.google.android.apps.common.testing.accessibility.framework.AccessibilityCheckResultUtils.matchesViews
+import dev.samadali.zen.R
 import dev.samadali.zen.ZenApp
+import dev.samadali.zen.data.FocusSession
 import dev.samadali.zen.pomodoro.PomodoroTimer
-import org.hamcrest.Matchers.endsWith
+import kotlinx.coroutines.runBlocking
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.allOf
+import java.time.LocalDate
+import java.time.ZoneId
 
 /** Shared setup for the Espresso screen tests. */
 object UiTestSupport {
@@ -23,10 +30,14 @@ object UiTestSupport {
         // (touch target size, labels, contrast) on the whole screen.
         AccessibilityChecks.enable()
             .setRunChecksFromRootView(true)
-            // The platform CalendarView's month grid has no label. It is replaced by
-            // the heatmap calendar, after which this exception should be removed.
+            // Calendar days are 48dp tall but share the width between seven columns, so on
+            // narrow phones (CI's emulator is 320dp wide) they're about 35dp wide. That still
+            // passes WCAG 2.2's 24dp minimum target size; nothing else is exempt.
             .setSuppressingResultMatcher(
-                matchesViews(withClassName(endsWith("SimpleMonthView")))
+                allOf(
+                    matchesCheckNames(`is`("TouchTargetSizeCheck")),
+                    matchesViews(withId(R.id.dayText))
+                )
             )
     }
 
@@ -46,6 +57,16 @@ object UiTestSupport {
             PomodoroTimer.clock = SystemClock::elapsedRealtime
             context.getSharedPreferences("pomodoro", Context.MODE_PRIVATE).edit().clear().commit()
             PomodoroTimer.init(context)
+        }
+    }
+
+    /** Adds a completed 25 minute study session at noon, [daysAgo] days before today. */
+    fun addSession(daysAgo: Long) {
+        val completedAt = LocalDate.now().minusDays(daysAgo).atTime(12, 0)
+            .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        runBlocking {
+            (context as ZenApp).database.focusSessionDao()
+                .insert(FocusSession(startedAt = completedAt - 25 * 60_000, completedAt = completedAt, durationMillis = 25 * 60_000))
         }
     }
 

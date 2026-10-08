@@ -37,10 +37,10 @@ class NavigationTest {
         onView(withId(R.id.tasksTitle)).check(matches(isDisplayed()))
 
         onView(withId(R.id.calendar)).perform(click())
-        onView(withId(R.id.calendarInfoButton)).check(matches(isDisplayed()))
+        onView(withId(R.id.calendarTitle)).check(matches(isDisplayed()))
 
         onView(withId(R.id.stats)).perform(click())
-        onView(withId(R.id.tasksCompletedNumber)).check(matches(isDisplayed()))
+        onView(withId(R.id.statsTitle)).check(matches(isDisplayed()))
 
         onView(withId(R.id.settings)).perform(click())
         onView(withId(R.id.settingsTitle)).check(matches(isDisplayed()))

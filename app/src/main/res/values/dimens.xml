@@ -26,6 +26,7 @@
     <dimen name="text_title">44sp</dimen>
     <dimen name="text_title_min">28sp</dimen>
     <dimen name="text_timer">60sp</dimen>
+    <dimen name="text_stat">40sp</dimen>
     <dimen name="text_heading">22sp</dimen>
     <dimen name="text_button">22sp</dimen>
     <dimen name="text_body_large">18sp</dimen>
