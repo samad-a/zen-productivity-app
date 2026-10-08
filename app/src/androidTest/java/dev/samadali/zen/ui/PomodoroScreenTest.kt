@@ -4,6 +4,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -88,7 +89,7 @@ class PomodoroScreenTest {
 
     @Test
     fun changingTheStudyDurationUpdatesTheTimer() {
-        onView(withId(R.id.studyTextInput)).perform(replaceText("40"), closeSoftKeyboard())
+        onView(withId(R.id.studyTextInput)).perform(scrollTo(), replaceText("40"), closeSoftKeyboard())
 
         onView(withId(R.id.clockTimer)).check(matches(withText("40:00")))
     }
