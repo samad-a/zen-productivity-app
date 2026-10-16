@@ -59,6 +59,9 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: x86_64
+          # The action's defaults (2 cores, small RAM) left the API 37 emulator stuck offline until the boot timeout
+          cores: 4
+          ram-size: 4096M
           # Keep on: with animations enabled on a fresh AVD about half the Espresso tests fail
           disable-animations: true
           script: ./gradlew connectedDebugAndroidTest
