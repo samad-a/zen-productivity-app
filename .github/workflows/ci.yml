@@ -34,7 +34,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [35, 37]
+        # API 37's SDK packages use major.minor names (android-37.0); quoted so YAML keeps the ".0"
+        api-level: ['35', '37.0']
     steps:
       - uses: actions/checkout@v7
 
