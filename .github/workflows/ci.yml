@@ -31,6 +31,10 @@ jobs:
   instrumented-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [35, 37]
     steps:
       - uses: actions/checkout@v7
 
@@ -48,12 +52,13 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Run instrumented tests on an emulator
+      - name: Run instrumented tests on an API ${{ matrix.api-level }} emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 35
+          api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: x86_64
+          # Keep on: with animations enabled on a fresh AVD about half the Espresso tests fail
           disable-animations: true
           script: ./gradlew connectedDebugAndroidTest
 
@@ -61,5 +66,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: instrumented-test-report
+          name: instrumented-test-report-api-${{ matrix.api-level }}
           path: app/build/reports/androidTests/connected/
